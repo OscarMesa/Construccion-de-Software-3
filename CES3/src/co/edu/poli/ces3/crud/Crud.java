@@ -188,8 +188,7 @@ public abstract class Crud implements ICrud {
     @Override
     public int insert() {
         int res = 1, i;
-        Object auto_id;
-        ArrayList<Field> autonumeric = new ArrayList<Field>();
+        Object auto_id; 
         ResultSet r = null;
         cnn = get_Conexion();
         ArrayList<Object> parametros = new ArrayList<Object>();
@@ -199,9 +198,6 @@ public abstract class Crud implements ICrud {
         for (Field campo : this.getClass().getDeclaredFields()) {
             campo.setAccessible(true);
             col = campo.getAnnotation(Columna.class);
-            if (col.AutoNumerico()) {
-                autonumeric.add(campo);
-            }
             if (col == null || col.AutoNumerico()) {
                 continue;
             }
@@ -213,19 +209,7 @@ public abstract class Crud implements ICrud {
         }
         System.out.println(getSQLInsert());
         res = execute(getSQLInsert(), parametros.toArray());
-        System.out.println("desde respuesta " + res);
-        i = 0;
-        try {
-             while (autoincrement.entrySet().iterator().hasNext()) {
-                 System.out.println("");
-                auto_id = autoincrement.getObject(autonumeric.get(i).getName());
-                autonumeric.get(i).setAccessible(true);
-                autonumeric.get(i).set(this, auto_id);
-                i++;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        System.out.println("desde respuesta " + res);        
         return res;
     }
 
