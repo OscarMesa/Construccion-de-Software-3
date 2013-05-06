@@ -5,6 +5,7 @@
 package org.yournamehere.client.rpc;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import java.util.ArrayList;
 import org.yournamehere.client.model.modPerfil;
 
 /**
@@ -16,5 +17,5 @@ public interface servPerfilesAsync {
        public void guardar(modPerfil u, AsyncCallback<Integer> asyncCallback);
        public void modificar(modPerfil u, AsyncCallback<Integer> asyncCallback);
        public void eliminar(Integer id, AsyncCallback<Integer> asyncCallback);
-
+       public void obtenerPerfiles(AsyncCallback<ArrayList<modPerfil>> callback);
 }

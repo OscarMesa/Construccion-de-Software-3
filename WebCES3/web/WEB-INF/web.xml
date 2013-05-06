@@ -12,6 +12,10 @@
         <servlet-name>servModulos</servlet-name>
         <servlet-class>org.yournamehere.server.rpc.servModulosImpl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>servPerfilesModulos</servlet-name>
+        <servlet-class>org.yournamehere.server.rpc.servPerfilesModulosImpl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>servUsuarios</servlet-name>
         <url-pattern>/org.yournamehere.Main/rpc/servusuarios</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>servModulos</servlet-name>
         <url-pattern>/org.yournamehere.Main/rpc/servmodulos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servPerfilesModulos</servlet-name>
+        <url-pattern>/org.yournamehere.Main/rpc/servperfilesmodulos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -6,6 +6,7 @@ package org.yournamehere.server.rpc;
 
 import co.edu.poli.ces3.crud.bean.tbl_perfiles;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import java.util.ArrayList;
 import org.yournamehere.client.model.modPerfil;
 
 import org.yournamehere.client.rpc.servPerfiles;
@@ -44,5 +45,20 @@ public class servPerfilesImpl extends RemoteServiceServlet implements servPerfil
         tbl_perfiles perfil = new tbl_perfiles();
         perfil.setId_perfil(id);
         return perfil.delete();
+    }
+    
+    @Override
+    public ArrayList<modPerfil> obtenerPerfiles() {
+        tbl_perfiles t = new tbl_perfiles();
+        ArrayList<tbl_perfiles> list = (t.select()).get("tbl_perfiles");
+        list.remove(0);
+        ArrayList<modPerfil> elements = new ArrayList<modPerfil>();
+        for (tbl_perfiles x : list) {
+            modPerfil a = new modPerfil();
+            a.setId_perfil(x.getId_perfil());
+            a.setNombre(x.getNombre());
+            elements.add(a);
+        }
+        return elements;  
     }
 }

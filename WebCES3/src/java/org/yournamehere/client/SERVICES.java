@@ -6,6 +6,8 @@ import org.yournamehere.client.rpc.servModulosAsync;
 
 import org.yournamehere.client.rpc.servPerfiles;
 import org.yournamehere.client.rpc.servPerfilesAsync;
+import org.yournamehere.client.rpc.servPerfilesModulos;
+import org.yournamehere.client.rpc.servPerfilesModulosAsync;
 
 import org.yournamehere.client.rpc.servUsuarios;
 import org.yournamehere.client.rpc.servUsuariosAsync;
@@ -28,6 +30,8 @@ public class SERVICES {
             return GWT.create(servModulos.class);
         }
         
-    
+        public static servPerfilesModulosAsync getPerfilesModulosAsync(){
+            return GWT.create(servPerfilesModulos.class);
+        }
     
 }

@@ -3,6 +3,7 @@ package co.edu.poli.ces3.crud.bean;
 import co.edu.poli.ces3.crud.Columna;
 import co.edu.poli.ces3.crud.Crud;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public final class tbl_perfiles_modulos extends Crud {
 
@@ -34,15 +35,12 @@ public final class tbl_perfiles_modulos extends Crud {
          
      }
      
-     @Override
-     public ArrayList<tbl_perfiles_modulos> select()
-     {
-         return (ArrayList<tbl_perfiles_modulos>)super.select();
-     }
      public static void main(String... args){
          tbl_perfiles_modulos t = new tbl_perfiles_modulos();
+         ArrayList<tbl_perfiles_modulos> list = (t.select()).get("tbl_perfiles_modulos");
+         //list.remove(0);
          
-         for (tbl_perfiles_modulos x : t.select()) {
+         for (tbl_perfiles_modulos x : list) {
              System.out.println(x);
          }
      }

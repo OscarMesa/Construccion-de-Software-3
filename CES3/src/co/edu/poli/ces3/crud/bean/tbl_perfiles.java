@@ -2,6 +2,7 @@ package co.edu.poli.ces3.crud.bean;
 
 import co.edu.poli.ces3.crud.Columna;
 import co.edu.poli.ces3.crud.Crud;
+import java.util.ArrayList;
 
 public final class tbl_perfiles extends Crud {
 
@@ -57,5 +58,12 @@ public final class tbl_perfiles extends Crud {
      }
 
      public static void main(String... args){
+         tbl_perfiles t = new tbl_perfiles();
+         ArrayList<tbl_perfiles> list = (t.select()).get("tbl_perfiles");
+         list.remove(0);
+         
+         for (tbl_perfiles x : list) {
+             System.out.println(x.getNombre());
+         }
      }
 }

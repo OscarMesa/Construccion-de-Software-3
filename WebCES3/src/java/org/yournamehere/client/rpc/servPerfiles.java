@@ -6,6 +6,7 @@ package org.yournamehere.client.rpc;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import java.util.ArrayList;
 import org.yournamehere.client.model.modPerfil;
 
 /**
@@ -20,4 +21,6 @@ public interface servPerfiles extends RemoteService {
     public Integer modificar(modPerfil u);
     
     public Integer eliminar(Integer id);
+    
+     public ArrayList<modPerfil> obtenerPerfiles();
 }

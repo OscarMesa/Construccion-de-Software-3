@@ -5,6 +5,8 @@ package co.edu.poli.ces3.crud;
  * and open the template in the editor.
  */
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -64,7 +66,7 @@ public interface ICrud {
      * @see #set_Posicion(int)
      * @return
      */
-    public List<? extends ICrud> select();
+    public HashMap<String, ArrayList> select();
 
     /**
      * Ejecuta una consulta en la base de datos se puede parametrizar el
@@ -78,7 +80,7 @@ public interface ICrud {
      * @param params
      * @return
      */
-    public List<? extends ICrud> select(String sql, Object... params);
+    public HashMap<String, ArrayList> select(String sql, Object... params);
 
     /**
      * Tabla sobre la cual se realizan las operaciones en la base de datos por

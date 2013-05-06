@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -263,7 +264,7 @@ public abstract class Crud implements ICrud {
         }
     }
 
-    public List<? extends ICrud> select() {
+    public HashMap<String, ArrayList> select() {
         int res = 0;
         ArrayList<Object> parametros = new ArrayList<Object>();
         try {
@@ -283,10 +284,10 @@ public abstract class Crud implements ICrud {
        }
     }
     
-    public List<? extends ICrud> select(String sql,  Object... parametros) {
+    public HashMap<String, ArrayList> select(String sql,  Object... parametros) {
         Connection con;
         PreparedStatement cmd;
-        ArrayList<Crud> registros = new ArrayList<Crud>();
+        HashMap<String, ArrayList> registros = new HashMap<String,ArrayList>();
         Crud reg;
         int ind = 1;
         con = get_Conexion();
@@ -314,19 +315,34 @@ public abstract class Crud implements ICrud {
                 filas.absolute(get_Posicion());
             }
             Columna col;
-            
+            ResultSetMetaData firstregister = filas.getMetaData();
+            for (int i = 1; i <= firstregister.getColumnCount(); i++) {
+                StringTokenizer labelName = new StringTokenizer(firstregister.getColumnName(i),"$");
+                String elemnt = labelName.nextToken();
+                Class<Crud> c;
+                if(registros.get(elemnt) == null)
+                {
+                    ArrayList v = new ArrayList();
+                    v.add(Class.forName("co.edu.poli.ces3.crud.bean."+elemnt));
+                    registros.put(elemnt, v);
+                }
+                
+            }
             while (filas.next()) {
-                System.out.println("Encontro");
-                reg = this.getClass().newInstance();
-                for (Field campo : reg.getClass().getDeclaredFields()) {
-                    col = campo.getAnnotation(Columna.class);
-                    if (col == null) {
-                        continue;
+                for (Map.Entry<String, ArrayList> entry : registros.entrySet()) {
+                    String table = entry.getKey();
+                    ArrayList list = entry.getValue();
+                    reg = (Crud) ((Class)list.get(0)).newInstance();
+                    for (Field campo : reg.getClass().getDeclaredFields()) {
+                        col = campo.getAnnotation(Columna.class);
+                        if(col == null){
+                            continue;
+                        }
+                        campo.setAccessible(true);
+                        campo.set(reg, filas.getObject(table + "$" + campo.getName()));
                     }
-                    campo.setAccessible(true);
-                    campo.set(reg, filas.getObject(this.getClass().getSimpleName().toLowerCase() + "$" + campo.getName()));
-               }
-               registros.add(reg);
+                    list.add(reg);
+                }
             }
             //con.commit();
             filas.close();
@@ -335,9 +351,14 @@ public abstract class Crud implements ICrud {
         } catch (SQLException ex) {
             //con.rollback();
             ex.printStackTrace();
-        } finally {
-            return registros;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Crud.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return registros;
     }
 
     public String getSQLDelete() {

@@ -6,6 +6,7 @@ package org.yournamehere.server.rpc;
 
 import co.edu.poli.ces3.crud.bean.tbl_modulos;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import java.util.ArrayList;
 import org.yournamehere.client.model.modModulo;
 
 import org.yournamehere.client.rpc.servModulos;
@@ -47,6 +48,21 @@ public class servModulosImpl extends RemoteServiceServlet implements servModulos
         tbl_modulos modulo = new tbl_modulos();
         modulo.setId_modulo(id);
         return modulo.delete();
+    }
+
+    @Override
+    public ArrayList<modModulo> obtenerModulos() {
+        tbl_modulos t = new tbl_modulos();
+        ArrayList<tbl_modulos> list = (t.select()).get("tbl_modulos");
+        list.remove(0);
+        ArrayList<modModulo> elements = new ArrayList<modModulo>();
+        for (tbl_modulos x : list) {
+            modModulo a = new modModulo();
+            a.setId_modulo(x.getId_modulo());
+            a.setNombre(x.getNombre());
+            elements.add(a);
+        }
+        return elements; 
     }
 
    

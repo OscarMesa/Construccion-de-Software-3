@@ -5,14 +5,11 @@
 package org.yournamehere.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.sencha.gxt.widget.core.client.TabPanel;
 
 /**
@@ -45,9 +42,11 @@ public class MainEntryPoint implements  EntryPoint {
         uiUsuario usuario = new uiUsuario();
         uiPerfil perfil = new uiPerfil();
         uiModulo modulo = new uiModulo();
+        uiPerfilesModulos pm = new uiPerfilesModulos();
         p.add(usuario.getPanel(),"Usuario");        
         p.add(perfil.getPanel(),"Perfil");
         p.add(modulo.getPanel(),"Modulo");
+        p.add(pm.getPanel(),"Modulos de los perfiles");
 
        // RootPanel.get().add(button);
       //  RootPanel.get().add(label);
