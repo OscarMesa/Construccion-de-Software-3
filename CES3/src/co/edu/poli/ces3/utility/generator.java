@@ -88,12 +88,10 @@ public class generator {
                    anotation  += ",NameForeingKey = \""+ CatalogForeingKey.get(field.toLowerCase()) +"." + field.toLowerCase() +"\")";
                else 
                    anotation  += ",NameForeingKey = \"\")";
-               
-               
-               
-               atributs.append("     "+anotation+"\n    private " + infotable.getColumnClassName(i) + " " + field +";\n\n");
-               MethodsGet.append("     public " + infotable.getColumnClassName(i) + " get" + field +"(){\n           return this."+field+";\n     }\n\n");
-               MethodsSet.append("     public void" + " set" + field +"("+infotable.getColumnClassName(i) +" "+ field +"){\n       this."+field+" = "+field +";\n     }\n\n");
+             
+               atributs.append("     "+anotation+"\n    private " + infotable.getColumnClassName(i) + " " + field.toLowerCase() +";\n\n");
+               MethodsGet.append("     public " + infotable.getColumnClassName(i) + " get" + field +"(){\n           return this."+field.toLowerCase()+";\n     }\n\n");
+               MethodsSet.append("     public void" + " set" + field +"("+infotable.getColumnClassName(i) +" "+ field.toLowerCase() +"){\n       this."+field.toLowerCase()+" = "+field.toLowerCase() +";\n     }\n\n");
            }
            
            out.append(atributs.toString()+"\n\n");
@@ -138,7 +136,7 @@ public class generator {
     
     public static void main(String[] args){
         generator class1 = new generator();
-        class1.setNameClass("tbl_usuarios");
+        class1.setNameClass("tbl_perfiles_modulos");
         class1.WhireCode();
    
     }

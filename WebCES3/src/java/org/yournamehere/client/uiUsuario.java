@@ -4,16 +4,25 @@
  */
 package org.yournamehere.client;
 
+import org.yournamehere.client.prop.propUsuario;
+import org.yournamehere.client.model.modUsuario;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
+import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.state.client.GridStateHandler;
 import com.sencha.gxt.widget.core.client.ContentPanel;
+import com.sencha.gxt.widget.core.client.Dialog.PredefinedButton;
 import com.sencha.gxt.widget.core.client.FramedPanel;
+import com.sencha.gxt.widget.core.client.box.PromptMessageBox;
 import com.sencha.gxt.widget.core.client.button.TextButton;
+import com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer;
+import com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer.HorizontalLayoutData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
+import com.sencha.gxt.widget.core.client.event.HideEvent;
+import com.sencha.gxt.widget.core.client.event.HideEvent.HideHandler;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.NumberField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
@@ -93,18 +102,21 @@ public class uiUsuario {
     {
         panel = new FramedPanel();
         VerticalLayoutContainer p = new VerticalLayoutContainer();
+        HorizontalLayoutContainer h = new HorizontalLayoutContainer();
+        HorizontalLayoutData layoutData = new HorizontalLayoutData(30, 25, new Margins(0,25,0,0));
         panel.add(p);
         panel.setHeadingText("Usuario");
         panel.setCollapsible(true);
         p.setHeight(400);
         p.add(initId_usuario());
         p.add(initNombre());
+        p.add(initUsuario());
         p.add(initApellido());
         p.add(initCLave());
-        p.add(initBtn_Guardar());
-        p.add(initBtn_Editar());
-        p.add(initBtn_Eliminar());
-        p.add(initUsuario());
+        h.add(initBtn_Guardar(),layoutData);
+        h.add(initBtn_Editar(),layoutData);
+        h.add(initBtn_Eliminar(),layoutData);
+        p.add(h);
         //p.add(initGridUsuario());
     }
     
@@ -132,36 +144,50 @@ public class uiUsuario {
                });
            }
        };
-       return new FieldLabel(btnEditar);
+       return btnEditar;
     }
     
     public Widget initBtn_Editar()
     {
+       
        TextButton btnEditar;
        btnEditar = new TextButton("Editar"){
            @Override
            protected void onClick(Event event){
                super.onClick(event);
-               modUsuario mod = new modUsuario();
-               mod.setApellido(apellido.getValue());
-               mod.setId_usuario((Integer)id_usuario.getValue());
-               mod.setNombre(nombre.getValue());
-               mod.setClave(clave.getValue());
-               SERVICES.getUsuariosAsync().modificar(mod, new AsyncCallback<Integer>() {
+               final PromptMessageBox box = new PromptMessageBox("Id usuario", "Ingrese el Id del estudiante:");  
+               box.show();
+               box.addHideHandler(new HideHandler() {
 
                    @Override
-                   public void onFailure(Throwable caught) {
-                       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                   }
+                   public void onHide(HideEvent event) {
+                        if (box.getHideButton() == box.getButtonById(PredefinedButton.OK.name())) {
+                            modUsuario mod = new modUsuario();
+                            mod.setApellido(apellido.getValue());
+                            mod.setId_usuario((Integer.parseInt(box.getValue())));
+                            mod.setNombre(nombre.getValue());
+                            mod.setClave(clave.getValue());
+                            mod.setUsuario(usuario.getValue());
+                            SERVICES.getUsuariosAsync().modificar(mod, new AsyncCallback<Integer>() {
 
-                   @Override
-                   public void onSuccess(Integer result) {
-                       Info.display("Respuesta", result.toString());
+                                @Override
+                                public void onFailure(Throwable caught) {
+                                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                                }
+
+                                @Override
+                                public void onSuccess(Integer result) {
+                                    Info.display("Respuesta", result.toString());
+                                }
+                            });
+                        } else if (box.getHideButton() == box.getButtonById(PredefinedButton.CANCEL.name())) {
+                          box.hide();
+                        }
                    }
                });
            }
        };
-       return new FieldLabel(btnEditar);
+       return btnEditar;
     }
     public Widget initBtn_Guardar()
     {
@@ -191,7 +217,7 @@ public class uiUsuario {
                });
            }
        };
-       return new FieldLabel(btnGuardar);
+       return btnGuardar;
     }
     
     public Widget initUsuario(){

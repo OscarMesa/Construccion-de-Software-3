@@ -6,7 +6,7 @@ package org.yournamehere.client.rpc;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import org.yournamehere.client.modUsuario;
+import org.yournamehere.client.model.modUsuario;
 
 /**
  *

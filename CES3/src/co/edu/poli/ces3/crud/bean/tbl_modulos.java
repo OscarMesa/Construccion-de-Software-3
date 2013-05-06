@@ -6,62 +6,60 @@ import co.edu.poli.ces3.crud.Crud;
 public final class tbl_modulos extends Crud {
 
      @Columna(ClavePrimaria=true,AutoNumerico=true, Requered = true,NameForeingKey = "")
-    private java.lang.Integer Id_modulo;
+    private java.lang.Integer id_modulo;
 
      @Columna(ClavePrimaria=false,AutoNumerico=false, Requered = true,NameForeingKey = "")
-    private java.lang.String Nombre;
+    private java.lang.String nombre;
 
      @Columna(ClavePrimaria=false,AutoNumerico=false, Requered = false,NameForeingKey = "")
-    private java.lang.String Descripcion;
+    private java.lang.String descripcion;
 
      @Columna(ClavePrimaria=false,AutoNumerico=false, Requered = true,NameForeingKey = "")
-    private java.sql.Timestamp Creado;
+    private java.sql.Timestamp creado;
 
      @Columna(ClavePrimaria=false,AutoNumerico=false, Requered = false,NameForeingKey = "")
-    private java.lang.Boolean Activo;
+    private java.lang.Boolean activo;
 
 
 
-     public java.lang.Integer Id_modulo(){
-           return this.Id_modulo;
+     public java.lang.Integer getId_modulo(){
+           return this.id_modulo;
      }
 
-     public java.lang.String Nombre(){
-           return this.Nombre;
+     public java.lang.String getNombre(){
+           return this.nombre;
      }
 
-     public java.lang.String Descripcion(){
-           return this.Descripcion;
+     public java.lang.String getDescripcion(){
+           return this.descripcion;
      }
 
-     public java.sql.Timestamp Creado(){
-           return this.Creado;
+     public java.sql.Timestamp getCreado(){
+           return this.creado;
      }
 
-     public java.lang.Boolean Activo(){
-           return this.Activo;
+     public java.lang.Boolean getActivo(){
+           return this.activo;
      }
 
-
-
-     public void setId_modulo(java.lang.Integer Id_modulo){
-       this.Id_modulo = Id_modulo;
+     public void setId_modulo(java.lang.Integer id_modulo){
+       this.id_modulo = id_modulo;
      }
 
-     public void setNombre(java.lang.String Nombre){
-       this.Nombre = Nombre;
+     public void setNombre(java.lang.String nombre){
+       this.nombre = nombre;
      }
 
-     public void setDescripcion(java.lang.String Descripcion){
-       this.Descripcion = Descripcion;
+     public void setDescripcion(java.lang.String descripcion){
+       this.descripcion = descripcion;
      }
 
-     public void setCreado(java.sql.Timestamp Creado){
-       this.Creado = Creado;
+     public void setCreado(java.sql.Timestamp creado){
+       this.creado = creado;
      }
 
-     public void setActivo(java.lang.Boolean Activo){
-       this.Activo = Activo;
+     public void setActivo(java.lang.Boolean activo){
+       this.activo = activo;
      }
 
      public tbl_modulos(){

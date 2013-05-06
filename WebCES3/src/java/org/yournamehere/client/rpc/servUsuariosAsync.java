@@ -5,7 +5,7 @@
 package org.yournamehere.client.rpc;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import org.yournamehere.client.modUsuario;
+import org.yournamehere.client.model.modUsuario;
 
 /**
  *

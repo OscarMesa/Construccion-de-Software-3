@@ -6,51 +6,51 @@ import co.edu.poli.ces3.crud.Crud;
 public final class tbl_perfiles extends Crud {
 
      @Columna(ClavePrimaria=true,AutoNumerico=true, Requered = true,NameForeingKey = "")
-    private java.lang.Integer Id_perfil;
+    private java.lang.Integer id_perfil;
 
      @Columna(ClavePrimaria=false,AutoNumerico=false, Requered = true,NameForeingKey = "")
-    private java.lang.String Nombre;
+    private java.lang.String nombre;
 
      @Columna(ClavePrimaria=false,AutoNumerico=false, Requered = false,NameForeingKey = "")
-    private java.lang.String Descripcion;
+    private java.lang.String descripcion;
 
      @Columna(ClavePrimaria=false,AutoNumerico=false, Requered = false,NameForeingKey = "")
-    private java.lang.Boolean Activo;
+    private java.lang.Boolean activo;
 
 
 
-     public java.lang.Integer Id_perfil(){
-           return this.Id_perfil;
+     public java.lang.Integer getId_perfil(){
+           return this.id_perfil;
      }
 
-     public java.lang.String Nombre(){
-           return this.Nombre;
+     public java.lang.String getNombre(){
+           return this.nombre;
      }
 
-     public java.lang.String Descripcion(){
-           return this.Descripcion;
+     public java.lang.String getDescripcion(){
+           return this.descripcion;
      }
 
-     public java.lang.Boolean Activo(){
-           return this.Activo;
+     public java.lang.Boolean getActivo(){
+           return this.activo;
      }
 
 
 
-     public void setId_perfil(java.lang.Integer Id_perfil){
-       this.Id_perfil = Id_perfil;
+     public void setId_perfil(java.lang.Integer id_perfil){
+       this.id_perfil = id_perfil;
      }
 
-     public void setNombre(java.lang.String Nombre){
-       this.Nombre = Nombre;
+     public void setNombre(java.lang.String nombre){
+       this.nombre = nombre;
      }
 
-     public void setDescripcion(java.lang.String Descripcion){
-       this.Descripcion = Descripcion;
+     public void setDescripcion(java.lang.String descripcion){
+       this.descripcion = descripcion;
      }
 
-     public void setActivo(java.lang.Boolean Activo){
-       this.Activo = Activo;
+     public void setActivo(java.lang.Boolean activo){
+       this.activo = activo;
      }
 
      public tbl_perfiles(){

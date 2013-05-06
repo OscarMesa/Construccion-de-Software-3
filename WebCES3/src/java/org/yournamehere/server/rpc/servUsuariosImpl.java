@@ -6,7 +6,7 @@ package org.yournamehere.server.rpc;
 
 import co.edu.poli.ces3.crud.bean.tbl_usuarios;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import org.yournamehere.client.modUsuario;
+import org.yournamehere.client.model.modUsuario;
 
 import org.yournamehere.client.rpc.servUsuarios;
 
@@ -24,7 +24,10 @@ public class servUsuariosImpl extends RemoteServiceServlet implements servUsuari
         us.setNombre(u.getNombre());
         us.setClave(u.getClave());
         us.setUsuario(u.getUsuario());
-        return us.insert();
+        if(us.insert()>0)
+            return Integer.parseInt(us.getElementAutoincrement("id_usuario").toString());
+        else
+            return 0;
     }
 
     @Override

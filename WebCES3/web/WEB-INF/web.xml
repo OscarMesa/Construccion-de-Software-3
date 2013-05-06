@@ -4,9 +4,25 @@
         <servlet-name>servUsuarios</servlet-name>
         <servlet-class>org.yournamehere.server.rpc.servUsuariosImpl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>servPerfiles</servlet-name>
+        <servlet-class>org.yournamehere.server.rpc.servPerfilesImpl</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servModulos</servlet-name>
+        <servlet-class>org.yournamehere.server.rpc.servModulosImpl</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>servUsuarios</servlet-name>
         <url-pattern>/org.yournamehere.Main/rpc/servusuarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servPerfiles</servlet-name>
+        <url-pattern>/org.yournamehere.Main/rpc/servperfiles</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servModulos</servlet-name>
+        <url-pattern>/org.yournamehere.Main/rpc/servmodulos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

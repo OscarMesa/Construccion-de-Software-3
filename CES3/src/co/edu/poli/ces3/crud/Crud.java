@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,7 +47,7 @@ public abstract class Crud implements ICrud {
     private Connection cnn;
     private boolean conexionExterna;
     private String tabla;
-    private HashMap<String,Object> autoincrement;
+    private TreeMap<String,Object> autoincrement;
     private ResultSet filas;
     {
         this.posicion = 0;
@@ -55,7 +56,7 @@ public abstract class Crud implements ICrud {
         this.cnn = null;
         this.filas = null;
         this.tabla = this.getClass().getSimpleName();
-        autoincrement = new HashMap<String, Object>();
+        autoincrement = new TreeMap<String, Object>();
     }
 
     @Override
@@ -473,11 +474,16 @@ public abstract class Crud implements ICrud {
             SqlForeingKey.append(" " + entry.getValue().get(0) + " " + entry.getKey() + " ON " + entry.getValue().get(1) );
             
         }
-        SqlSelect.delete(SqlSelect.length() - 4, SqlSelect.length());
+        if(SqlSelect.length()>0)
+            SqlSelect.delete(SqlSelect.length() - 4, SqlSelect.length());
         System.out.println("-------");
         System.out.println(FieldsSqlForeingKey.toString());
         System.out.println("--------");        
         FieldsSqlForeingKey.delete(FieldsSqlForeingKey.length() - 1, FieldsSqlForeingKey.length());
-        return "SELECT " + FieldsSqlForeingKey.toString() + " FROM " + get_Tabla() + SqlForeingKey.toString()  +" WHERE " + SqlSelect.toString();
+        return "SELECT " + FieldsSqlForeingKey.toString() + " FROM " + get_Tabla() + SqlForeingKey.toString()  +(SqlSelect.length()>0?" WHERE ":"") + SqlSelect.toString();
+    }
+    
+    public Object getElementAutoincrement(String position) {
+        return autoincrement.get(position);
     }
 }
