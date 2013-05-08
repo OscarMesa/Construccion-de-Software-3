@@ -30,6 +30,6 @@ public interface propPerfil extends PropertyAccess<modPerfil>{
 
     ValueProvider<modPerfil, String> descripcion();
 
-    ValueProvider<modPerfil, String> activo();
+    ValueProvider<modPerfil, Boolean> activo();
     
 }

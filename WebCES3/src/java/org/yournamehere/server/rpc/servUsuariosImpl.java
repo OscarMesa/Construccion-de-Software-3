@@ -6,6 +6,10 @@ package org.yournamehere.server.rpc;
 
 import co.edu.poli.ces3.crud.bean.tbl_usuarios;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.sencha.gxt.data.shared.loader.PagingLoadConfig;
+import com.sencha.gxt.data.shared.loader.PagingLoadResult;
+import com.sencha.gxt.data.shared.loader.PagingLoadResultBean;
+import java.util.ArrayList;
 import org.yournamehere.client.model.modUsuario;
 
 import org.yournamehere.client.rpc.servUsuarios;
@@ -48,6 +52,29 @@ public class servUsuariosImpl extends RemoteServiceServlet implements servUsuari
         return us.delete();
     }
 
+    @Override
+    public PagingLoadResult<modUsuario> consultar(PagingLoadConfig config) {
+        tbl_usuarios usu = new tbl_usuarios();
+        usu.set_Cantidad(config.getLimit());
+        usu.set_Posicion(config.getOffset());
+        
+        ArrayList<modUsuario> list = new ArrayList<modUsuario>();
+        ArrayList<tbl_usuarios> v = usu.select().get("tbl_usuarios");
+        v.remove(0);
+        for (tbl_usuarios xx : v) {
+            modUsuario h = new modUsuario();
+            h.setApellido(xx.getApellido());
+            h.setClave(xx.getClave());
+            h.setId_usuario(xx.getId_usuario());
+            h.setNombre(xx.getNombre());
+            h.setUsuario(xx.getUsuario());
+            list.add(h);
+        }
+        
+        PagingLoadResultBean<modUsuario> x = new PagingLoadResultBean<modUsuario>(list, config.getLimit(), config.getOffset());
+        
+        return x;
+    }
 
 
  

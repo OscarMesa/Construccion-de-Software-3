@@ -4,6 +4,8 @@
  */
 package org.yournamehere.client.prop;
 
+import com.google.gwt.editor.client.Editor.Path;
+import com.sencha.gxt.core.client.ValueProvider;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
 import org.yournamehere.client.model.modPerilesModulos;
@@ -12,9 +14,16 @@ import org.yournamehere.client.model.modPerilesModulos;
  *
  * @author oskar
  */
-public interface propPerfilesModulos extends PropertyAccess<propModulo>{
+public interface propPerfilesModulos extends PropertyAccess<modPerilesModulos>{
  
-    ModelKeyProvider<modPerilesModulos> id_perfil();
+    @Path("id_perfil")
+    ModelKeyProvider<modPerilesModulos> key();
     
-    ModelKeyProvider<modPerilesModulos> id_modulo();
+    ValueProvider<modPerilesModulos, Integer> id_perfil();
+    
+    ValueProvider<modPerilesModulos, Integer> id_modulo();
+
+    ValueProvider<modPerilesModulos, String> nombrePerfil();
+    
+    ValueProvider<modPerilesModulos, String> nombreModulo();
 }

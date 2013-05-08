@@ -6,6 +6,9 @@ package org.yournamehere.server.rpc;
 
 import co.edu.poli.ces3.crud.bean.tbl_perfiles;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.sencha.gxt.data.shared.loader.PagingLoadConfig;
+import com.sencha.gxt.data.shared.loader.PagingLoadResult;
+import com.sencha.gxt.data.shared.loader.PagingLoadResultBean;
 import java.util.ArrayList;
 import org.yournamehere.client.model.modPerfil;
 
@@ -48,8 +51,10 @@ public class servPerfilesImpl extends RemoteServiceServlet implements servPerfil
     }
     
     @Override
-    public ArrayList<modPerfil> obtenerPerfiles() {
+    public PagingLoadResult<modPerfil> obtenerPerfiles(PagingLoadConfig config) {
         tbl_perfiles t = new tbl_perfiles();
+        t.set_Cantidad(config.getLimit());
+        t.set_Posicion(config.getOffset());
         ArrayList<tbl_perfiles> list = (t.select()).get("tbl_perfiles");
         list.remove(0);
         ArrayList<modPerfil> elements = new ArrayList<modPerfil>();
@@ -59,6 +64,9 @@ public class servPerfilesImpl extends RemoteServiceServlet implements servPerfil
             a.setNombre(x.getNombre());
             elements.add(a);
         }
-        return elements;  
+        
+         PagingLoadResultBean<modPerfil> x = new PagingLoadResultBean<modPerfil>(elements, config.getLimit(), config.getOffset());
+        
+         return x;  
     }
 }

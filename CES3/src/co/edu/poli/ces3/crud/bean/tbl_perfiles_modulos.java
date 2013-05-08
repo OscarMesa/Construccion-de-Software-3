@@ -12,10 +12,14 @@ public final class tbl_perfiles_modulos extends Crud {
 
      @Columna(ClavePrimaria=true,AutoNumerico=false, Requered = true,NameForeingKey = "tbl_modulos.id_modulo")
     private java.lang.Integer id_modulo;
+     
+    @Columna(ClavePrimaria=false,AutoNumerico=false, Requered = false,NameForeingKey = "") 
+    private tbl_modulos tbl_modulos;
 
-
-
-     public java.lang.Integer getId_perfil(){
+    @Columna(ClavePrimaria=false,AutoNumerico=false, Requered = false,NameForeingKey = "")
+    private tbl_perfiles tbl_perfiles;
+    
+    public java.lang.Integer getId_perfil(){
            return this.id_perfil;
      }
 
@@ -34,6 +38,24 @@ public final class tbl_perfiles_modulos extends Crud {
      public tbl_perfiles_modulos(){
          
      }
+
+    public tbl_modulos getTbl_modulos() {
+        return tbl_modulos;
+    }
+
+    public void setTbl_modulos(tbl_modulos tbl_modulos) {
+        this.tbl_modulos = tbl_modulos;
+    }
+
+    public tbl_perfiles getTbl_perfiles() {
+        return tbl_perfiles;
+    }
+
+    public void setTbl_perfiles(tbl_perfiles tbl_perfiles) {
+        this.tbl_perfiles = tbl_perfiles;
+    }
+     
+     
      
      public static void main(String... args){
          tbl_perfiles_modulos t = new tbl_perfiles_modulos();

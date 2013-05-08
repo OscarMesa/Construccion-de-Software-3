@@ -1,0 +1,2 @@
+serviceClass: org.yournamehere.client.rpc.servUsuarios
+path: B5B124673D56E8BE35329EFD2A5ED5FA.gwt.rpc

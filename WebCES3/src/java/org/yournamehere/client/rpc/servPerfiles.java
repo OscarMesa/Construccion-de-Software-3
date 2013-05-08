@@ -6,6 +6,8 @@ package org.yournamehere.client.rpc;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.sencha.gxt.data.shared.loader.PagingLoadConfig;
+import com.sencha.gxt.data.shared.loader.PagingLoadResult;
 import java.util.ArrayList;
 import org.yournamehere.client.model.modPerfil;
 
@@ -22,5 +24,5 @@ public interface servPerfiles extends RemoteService {
     
     public Integer eliminar(Integer id);
     
-     public ArrayList<modPerfil> obtenerPerfiles();
+     public PagingLoadResult<modPerfil> obtenerPerfiles(PagingLoadConfig config);
 }

@@ -12,16 +12,12 @@ package co.edu.poli.ces3.crud;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
@@ -320,7 +316,7 @@ public abstract class Crud implements ICrud {
                 StringTokenizer labelName = new StringTokenizer(firstregister.getColumnName(i),"$");
                 String elemnt = labelName.nextToken();
                 Class<Crud> c;
-                if(registros.get(elemnt) == null)
+                if(registros.get(elemnt) == null && !this.getClass().getSimpleName().equals(elemnt))
                 {
                     ArrayList v = new ArrayList();
                     v.add(Class.forName("co.edu.poli.ces3.crud.bean."+elemnt));

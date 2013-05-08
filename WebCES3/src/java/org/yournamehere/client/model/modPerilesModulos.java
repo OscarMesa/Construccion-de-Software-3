@@ -13,7 +13,45 @@ import java.io.Serializable;
 public class modPerilesModulos implements Serializable{
     private Integer id_perfil;
     private Integer id_modulo;
+    private modModulo modulo;
+    private modPerfil perfil;
+    private String nombrePerfil;
+    private String nombreModulo;
 
+    public String getNombrePerfil() {
+        return nombrePerfil;
+    }
+
+    public void setNombrePerfil(String nombrePerfil) {
+        this.nombrePerfil = nombrePerfil;
+    }
+
+    public String getNombreModulo() {
+        return nombreModulo;
+    }
+
+    public void setNombreModulo(String nombreModulo) {
+        this.nombreModulo = nombreModulo;
+    }
+    
+    
+    
+    public modModulo getModulo() {
+        return modulo;
+    }
+
+    public void setModulo(modModulo modulo) {
+        this.modulo = modulo;
+    }
+
+    public modPerfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(modPerfil perfil) {
+        this.perfil = perfil;
+    }
+    
     public Integer getId_perfil() {
         return id_perfil;
     }

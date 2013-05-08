@@ -6,6 +6,8 @@ package org.yournamehere.client.rpc;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import com.sencha.gxt.data.shared.loader.PagingLoadConfig;
+import com.sencha.gxt.data.shared.loader.PagingLoadResult;
 import org.yournamehere.client.model.modUsuario;
 
 /**
@@ -20,4 +22,6 @@ public interface servUsuarios extends RemoteService {
     public Integer modificar(modUsuario u);
     
     public Integer eliminar(Integer id);
+    
+    public PagingLoadResult<modUsuario> consultar(PagingLoadConfig config);
 }

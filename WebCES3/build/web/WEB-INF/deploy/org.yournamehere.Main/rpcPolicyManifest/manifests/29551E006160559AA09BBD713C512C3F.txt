@@ -1,0 +1,2 @@
+serviceClass: org.yournamehere.client.rpc.servPerfilesModulos
+path: ADFCDEF90C3EC78FC82FEE51478485E4.gwt.rpc

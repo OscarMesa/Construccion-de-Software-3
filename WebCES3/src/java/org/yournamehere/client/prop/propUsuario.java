@@ -14,7 +14,7 @@ import com.sencha.gxt.data.shared.PropertyAccess;
  *
  * @author sala302
  */
-public interface propUsuario extends PropertyAccess<propUsuario> {
+public interface propUsuario extends PropertyAccess<modUsuario> {
 
     @Path("Id_usuario")
     ModelKeyProvider<modUsuario> key();

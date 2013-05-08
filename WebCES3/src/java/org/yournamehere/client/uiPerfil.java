@@ -11,14 +11,20 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.cell.core.client.form.ComboBoxCell;
 import com.sencha.gxt.core.client.util.Margins;
+import com.sencha.gxt.data.client.loader.RpcProxy;
 import com.sencha.gxt.data.shared.LabelProvider;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
+import com.sencha.gxt.data.shared.loader.LoadResultListStoreBinding;
+import com.sencha.gxt.data.shared.loader.PagingLoadConfig;
+import com.sencha.gxt.data.shared.loader.PagingLoadResult;
+import com.sencha.gxt.data.shared.loader.PagingLoader;
 import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.FramedPanel;
 import com.sencha.gxt.widget.core.client.box.PromptMessageBox;
 import com.sencha.gxt.widget.core.client.button.TextButton;
+import com.sencha.gxt.widget.core.client.container.BoxLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.HideEvent;
@@ -28,7 +34,14 @@ import com.sencha.gxt.widget.core.client.form.NumberField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
 import com.sencha.gxt.widget.core.client.form.TextArea;
 import com.sencha.gxt.widget.core.client.form.TextField;
+import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
+import com.sencha.gxt.widget.core.client.grid.ColumnModel;
+import com.sencha.gxt.widget.core.client.grid.Grid;
 import com.sencha.gxt.widget.core.client.info.Info;
+import com.sencha.gxt.widget.core.client.toolbar.PagingToolBar;
+import java.util.ArrayList;
+import java.util.List;
+import org.yournamehere.client.prop.propPerfil;
 /**
  *
  * @author oskar
@@ -44,7 +57,7 @@ public class uiPerfil{
     interface StatesProperties extends PropertyAccess<States> {
         ModelKeyProvider<States> value();
         LabelProvider<States> LabelName();
-  }
+    }
     
     public uiPerfil(){
         panel = new FramedPanel();
@@ -60,11 +73,65 @@ public class uiPerfil{
         p.add(initDescripcion());
         p.add(initActivo());
         
-        h.add(initBtn_Guardar(),layoutData);
-        h.add(initBtn_Editar(),layoutData);
-        h.add(initBtn_Eliminar(),layoutData);
+        p.add(initGrid_Perfiles());
         
-        p.add(h);
+        panel.addButton(initBtn_Guardar());
+        panel.addButton(initBtn_Editar());
+        panel.addButton(initBtn_Eliminar());
+        
+        
+        panel.setButtonAlign(BoxLayoutContainer.BoxLayoutPack.START);
+     }
+    
+    public Widget initGrid_Perfiles()
+    {
+        RpcProxy<PagingLoadConfig, PagingLoadResult<modPerfil>> proxy = new RpcProxy<PagingLoadConfig, PagingLoadResult<modPerfil>>() {
+
+            @Override
+            public void load(PagingLoadConfig loadConfig, AsyncCallback<PagingLoadResult<modPerfil>> callback) {
+                SERVICES.getPerfilesAsync().obtenerPerfiles(loadConfig, callback);
+            }
+        };
+        propPerfil prop = GWT.create(propPerfil.class);
+        ColumnConfig<modPerfil,Integer> id_perfil = new ColumnConfig<modPerfil, Integer>(prop.id_perfil(), 100, "Id");
+        ColumnConfig<modPerfil,String> nombre = new ColumnConfig<modPerfil, String>(prop.nombre(), 200, "Nombre");
+        ColumnConfig<modPerfil, String> descripcion = new ColumnConfig<modPerfil, String>(prop.descripcion(), 400, "Descripcion");
+        ColumnConfig<modPerfil,Boolean> activo = new ColumnConfig<modPerfil, Boolean>(prop.activo(),100,"Estado");
+
+        List<ColumnConfig<modPerfil,?>> list = new ArrayList<ColumnConfig<modPerfil,?>>();
+        
+        list.add(id_perfil);
+        list.add(nombre);
+        list.add(descripcion);
+        list.add(activo);
+        
+        ColumnModel<modPerfil> cm = new ColumnModel<modPerfil>(list);
+        ListStore<modPerfil> store = new ListStore<modPerfil>(prop.key());
+        
+        PagingLoader<PagingLoadConfig, PagingLoadResult<modPerfil>> loader = new PagingLoader<PagingLoadConfig, PagingLoadResult<modPerfil>>(proxy);
+        
+        loader.addLoadHandler(new LoadResultListStoreBinding<PagingLoadConfig, modPerfil, PagingLoadResult<modPerfil>>(store));
+        
+        Grid grid = new Grid<modPerfil>(store, cm);
+        grid.getView().setAutoExpandColumn(nombre);
+
+        grid.setColumnReordering(true);
+        grid.getView().setStripeRows(true);
+        grid.getView().setColumnLines(true);
+
+//      GridStateHandler<modUsuario> state = new GridStateHandler<modUsuario>(grid);
+//      state.loadState();
+      
+      PagingToolBar toolBar = new PagingToolBar(3);
+      toolBar.bind(loader);
+      loader.load();
+      
+      VerticalLayoutContainer contenedor = new VerticalLayoutContainer();
+      contenedor.setBorders(true);
+      contenedor.add(grid);
+      contenedor.add(toolBar);
+      
+      return contenedor;
     }
     
     public Widget initBtn_Guardar(){

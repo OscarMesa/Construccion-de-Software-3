@@ -13,12 +13,13 @@ import java.sql.Timestamp;
  */
 public class modModulo implements Serializable {
     
+    private Integer id_modulo;
     private String nombre;
     private String descripcion;
     private Timestamp creado;
     private Boolean activo;
     
-    private Integer id_modulo;
+    
 
     public Integer getId_modulo() {
         return id_modulo;

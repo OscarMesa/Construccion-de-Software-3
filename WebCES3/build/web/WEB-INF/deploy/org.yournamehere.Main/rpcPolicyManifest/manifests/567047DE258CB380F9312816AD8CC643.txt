@@ -1,0 +1,2 @@
+serviceClass: org.yournamehere.client.rpc.servModulos
+path: 2A1AB3E4D555D1D7E06A5BF6C0592551.gwt.rpc

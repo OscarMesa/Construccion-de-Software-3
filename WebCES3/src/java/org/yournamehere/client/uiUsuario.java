@@ -10,14 +10,21 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.validation.client.impl.GwtBeanDescriptor;
 import com.sencha.gxt.core.client.util.Margins;
+import com.sencha.gxt.data.client.loader.RpcProxy;
 import com.sencha.gxt.data.shared.ListStore;
+import com.sencha.gxt.data.shared.loader.LoadResultListStoreBinding;
+import com.sencha.gxt.data.shared.loader.PagingLoadConfig;
+import com.sencha.gxt.data.shared.loader.PagingLoadResult;
+import com.sencha.gxt.data.shared.loader.PagingLoader;
 import com.sencha.gxt.state.client.GridStateHandler;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.Dialog.PredefinedButton;
 import com.sencha.gxt.widget.core.client.FramedPanel;
 import com.sencha.gxt.widget.core.client.box.PromptMessageBox;
 import com.sencha.gxt.widget.core.client.button.TextButton;
+import com.sencha.gxt.widget.core.client.container.BoxLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer.HorizontalLayoutData;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
@@ -32,6 +39,7 @@ import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.Grid;
 import com.sencha.gxt.widget.core.client.info.Info;
+import com.sencha.gxt.widget.core.client.toolbar.PagingToolBar;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,57 +54,9 @@ public class uiUsuario {
     private ContentPanel root;
     private NumberField id_usuario;
     private TextField nombre;
-
-    public TextField getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(TextField usuario) {
-        this.usuario = usuario;
-    }
     private TextField usuario;
     private TextField apellido;
     private PasswordField clave;
-
-    public FramedPanel getPanel() {
-        return panel;
-    }
-
-    public void setPanel(FramedPanel panel) {
-        this.panel = panel;
-    }
-
-    public NumberField getId_usuario() {
-        return id_usuario;
-    }
-
-    public void setId_usuario(NumberField id_usuario) {
-        this.id_usuario = id_usuario;
-    }
-
-    public TextField getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(TextField nombre) {
-        this.nombre = nombre;
-    }
-
-    public TextField getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(TextField apellido) {
-        this.apellido = apellido;
-    }
-
-    public PasswordField getClave() {
-        return clave;
-    }
-
-    public void setClave(PasswordField password) {
-        this.clave = password;
-    }
     
     public uiUsuario()
     {
@@ -113,11 +73,14 @@ public class uiUsuario {
         p.add(initUsuario());
         p.add(initApellido());
         p.add(initCLave());
-        h.add(initBtn_Guardar(),layoutData);
-        h.add(initBtn_Editar(),layoutData);
-        h.add(initBtn_Eliminar(),layoutData);
+        p.add(initGridUsuario());
+        panel.addButton(initBtn_Guardar());
+        panel.addButton(initBtn_Editar());
+        panel.addButton(initBtn_Eliminar());
+        panel.setButtonAlign(BoxLayoutContainer.BoxLayoutPack.START);
         p.add(h);
-        //p.add(initGridUsuario());
+        
+        //
     }
     
     public Widget initBtn_Eliminar()
@@ -261,50 +224,109 @@ public class uiUsuario {
     }
     
     public Widget initGridUsuario() {
-        ColumnConfig<modUsuario, Integer> id_usuario = new ColumnConfig<modUsuario, Integer>(props.Id_usuario(), 50, "Identificacion");
-        ColumnConfig<modUsuario, String> nombre = new ColumnConfig<modUsuario, String>(props.Nombre(), 100, "Nombre");
-        ColumnConfig<modUsuario, String> apellido = new ColumnConfig<modUsuario, String>(props.Apellido(), 75, "Apellido");
-        ColumnConfig<modUsuario, String> usuario = new ColumnConfig<modUsuario, String>(props.Usuario(), 75, "Usuario");
-        ColumnConfig<modUsuario, String> password = new ColumnConfig<modUsuario, String>(props.Clave(), 75, "Clave");
-        
+       
+      RpcProxy<PagingLoadConfig, PagingLoadResult<modUsuario>> proxy = new RpcProxy<PagingLoadConfig, PagingLoadResult<modUsuario>>(){
+
+        @Override
+        public void load(PagingLoadConfig loadConfig, AsyncCallback<PagingLoadResult<modUsuario>> callback) {
+           SERVICES.getUsuariosAsync().consultar(loadConfig,callback);
+        }
+
+      };
+      
+      final propUsuario props = GWT.create(propUsuario.class);
+      ColumnConfig<modUsuario, Integer> id_usuario = new ColumnConfig<modUsuario, Integer>(props.Id_usuario(), 50, "Identificacion");
+      ColumnConfig<modUsuario, String> nombre = new ColumnConfig<modUsuario, String>(props.Nombre(), 100, "Nombre");
+      ColumnConfig<modUsuario, String> apellido = new ColumnConfig<modUsuario, String>(props.Apellido(), 75, "Apellido");
+      ColumnConfig<modUsuario, String> usuario = new ColumnConfig<modUsuario, String>(props.Usuario(), 75, "Usuario");
+      ColumnConfig<modUsuario, String> password = new ColumnConfig<modUsuario, String>(props.Clave(), 75, "Clave");
+       
       List<ColumnConfig<modUsuario, ?>> l = new ArrayList<ColumnConfig<modUsuario, ?>>();
       l.add(id_usuario);
       l.add(nombre);
       l.add(apellido);
       l.add(usuario);
       l.add(password);
-      ColumnModel<modUsuario> cm = new ColumnModel<modUsuario>(l);
       
+      ColumnModel<modUsuario> cm = new ColumnModel<modUsuario>(l);
       ListStore<modUsuario> store = new ListStore<modUsuario>(props.key());
-      modUsuario u;
-        for (int i = 0; i < 10; i++) {
-            u = new modUsuario();
-            u.setId_usuario(1);
-            u.setNombre("Esteban");
-            u.setApellido("Restrepo Ramirez");
-            u.setClave("rebeldia");
-            store.add(u);
-        }
-      root = new ContentPanel();
-      root.setHeadingText("Basic Grid");
-      root.setPixelSize(600, 300);
-      root.addStyleName("margin-10");
+      
+      PagingLoader<PagingLoadConfig, PagingLoadResult<modUsuario>>
+              loader = new PagingLoader<PagingLoadConfig, PagingLoadResult<modUsuario>>(proxy);
+      loader.addLoadHandler(
+      new LoadResultListStoreBinding<PagingLoadConfig, modUsuario, PagingLoadResult<modUsuario>>(store));
+      
       
       
       grid = new Grid<modUsuario>(store, cm);
       grid.getView().setAutoExpandColumn(nombre);
-      grid.getView().setStripeRows(true);
-      grid.getView().setColumnLines(true);
-      grid.setBorders(false);
+
  
       grid.setColumnReordering(true);
-      grid.setStateful(true);
-      grid.setStateId("gridExample");
- 
-      GridStateHandler<modUsuario> state = new GridStateHandler<modUsuario>(grid);
-      state.loadState();
+      grid.getView().setStripeRows(true);
+      grid.getView().setColumnLines(true);
       
-      root.add(grid);
-      return root;
+//      GridStateHandler<modUsuario> state = new GridStateHandler<modUsuario>(grid);
+//      state.loadState();
+      
+      PagingToolBar toolBar = new PagingToolBar(3);
+      toolBar.bind(loader);
+      loader.load();
+      
+      VerticalLayoutContainer contenedor = new VerticalLayoutContainer();
+      contenedor.setBorders(true);
+      contenedor.add(grid);
+      contenedor.add(toolBar);
+      
+      return contenedor;
     }
+
+        public FramedPanel getPanel() {
+        return panel;
+    }
+
+    public void setPanel(FramedPanel panel) {
+        this.panel = panel;
+    }
+
+    public NumberField getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(NumberField id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    public TextField getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(TextField nombre) {
+        this.nombre = nombre;
+    }
+
+    public TextField getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(TextField apellido) {
+        this.apellido = apellido;
+    }
+
+    public PasswordField getClave() {
+        return clave;
+    }
+
+    public void setClave(PasswordField password) {
+        this.clave = password;
+    }
+
+    public TextField getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(TextField usuario) {
+        this.usuario = usuario;
+    }
+    
 }
