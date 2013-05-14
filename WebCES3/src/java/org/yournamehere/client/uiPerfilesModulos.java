@@ -60,9 +60,24 @@ public abstract class uiPerfilesModulos {
     private ComboBox<modModulo> id_modulo;
     private FramedPanel panel;
     private Grid<modPerilesModulos> grid;
+    
     private PagingLoader<PagingLoadConfig, PagingLoadResult<modPerilesModulos>> loader;
-
-
+    
+    private final propModulo propModulo;
+    private ListStore<modModulo> ListModulos;
+    private PagingLoader<PagingLoadConfig, PagingLoadResult<modModulo>> loaderModulos;
+  
+    private final propPerfil propPerfiles;
+    private ListStore<modPerfil> Listperfiles;
+    private PagingLoader<PagingLoadConfig, PagingLoadResult<modPerfil>> loaderPerfiles;
+    {
+        propModulo = GWT.create(propModulo.class);
+        propPerfiles = GWT.create(propPerfil.class);
+    }
+    
+    /**
+     *
+     */
     public uiPerfilesModulos() {
         panel = new FramedPanel();
         VerticalLayoutContainer p = new VerticalLayoutContainer();
@@ -133,26 +148,10 @@ public abstract class uiPerfilesModulos {
         
        
         final propModulo propsed = GWT.create(propModulo.class);
-       
-        ListStore<modModulo> modulos = new ListStore<modModulo>(propsed.key());
-       
-        
-        
-        PagingLoader<PagingLoadConfig, PagingLoadResult<modModulo>>
-                loadermodulos = new PagingLoader<PagingLoadConfig, PagingLoadResult<modModulo>>(proxy1);
-        loadermodulos.addLoadHandler(
-        new LoadResultListStoreBinding<PagingLoadConfig, modModulo, PagingLoadResult<modModulo>>(modulos));
 
-        loadermodulos.load();
-//        
-//        modModulo x = new modModulo();
-//        x.setActivo(Boolean.TRUE);
-//        x.setDescripcion("afds");
-//        x.setId_modulo(Integer.MIN_VALUE);
-//        x.setNombre("oscar");
-//        modulos.add(x);
-//        
-        ComboBox<modModulo> Editid_modulo = new ComboBox<modModulo>(modulos,propsed.value());
+        ComboBox<modModulo> Editid_modulo = new ComboBox<modModulo>(ListModulos,propsed.value());
+        Editid_modulo.setTriggerAction(ComboBoxCell.TriggerAction.ALL);
+        
         
         Editid_modulo.setPropertyEditor(new PropertyEditor<modModulo>() {
 
@@ -171,7 +170,7 @@ public abstract class uiPerfilesModulos {
         // EDITING//
         final GridEditing<modPerilesModulos> editing = createGridEditing(grid);
         
-            editing.addEditor(nombreModulo, new Converter<String,modModulo>() {
+        editing.addEditor(nombreModulo, new Converter<String,modModulo>() {
 
             @Override
             public String convertFieldValue(modModulo object) {
@@ -186,8 +185,6 @@ public abstract class uiPerfilesModulos {
             }
         },Editid_modulo);
         editing.addEditor(nombrePerfil,new TextField());
-        //editing.addEditor(nombreModulo, new TextField());        
-         
         
         PagingToolBar toolBar;
         toolBar = new PagingToolBar(3);
@@ -361,21 +358,15 @@ public abstract class uiPerfilesModulos {
              SERVICES.getModulosAsync().obtenerModulos(loadConfig,callback);
             }  
         };
-        
-        
-        final propModulo props = GWT.create(propModulo.class);
        
-        ListStore<modModulo> modulos = new ListStore<modModulo>(props.key());
-       
-        PagingLoader<PagingLoadConfig, PagingLoadResult<modModulo>>
-                loader = new PagingLoader<PagingLoadConfig, PagingLoadResult<modModulo>>(proxy);
-        loader.addLoadHandler(
-        new LoadResultListStoreBinding<PagingLoadConfig, modModulo, PagingLoadResult<modModulo>>(modulos));
+        ListModulos = new ListStore<modModulo>(propModulo.key());
+        loaderModulos = new PagingLoader<PagingLoadConfig, PagingLoadResult<modModulo>>(proxy);
+        loaderModulos.addLoadHandler(
+        new LoadResultListStoreBinding<PagingLoadConfig, modModulo, PagingLoadResult<modModulo>>(ListModulos));
 
-        loader.load();
+        loaderModulos.load();
         
-        
-        id_modulo = new ComboBox<modModulo>(modulos,props.value());
+        id_modulo = new ComboBox<modModulo>(ListModulos,propModulo.value());
         id_modulo.setEmptyText("Seleccione un perfil");
         id_modulo.setAllowBlank(false);
         id_modulo.setTriggerAction(ComboBoxCell.TriggerAction.ALL);
@@ -393,17 +384,15 @@ public abstract class uiPerfilesModulos {
             }
 
         };
-        final propPerfil props = GWT.create(propPerfil.class);
-        ListStore<modPerfil> perfiles = new ListStore<modPerfil>(props.key());
         
-        PagingLoader<PagingLoadConfig, PagingLoadResult<modPerfil>>
-                loader = new PagingLoader<PagingLoadConfig, PagingLoadResult<modPerfil>>(proxy);
-        loader.addLoadHandler(
-        new LoadResultListStoreBinding<PagingLoadConfig, modPerfil, PagingLoadResult<modPerfil>>(perfiles));
+        Listperfiles = new ListStore<modPerfil>(propPerfiles.key());
+        loaderPerfiles = new PagingLoader<PagingLoadConfig, PagingLoadResult<modPerfil>>(proxy);
+        loaderPerfiles.addLoadHandler(
+        new LoadResultListStoreBinding<PagingLoadConfig, modPerfil, PagingLoadResult<modPerfil>>(Listperfiles));
 
-        loader.load();
+        loaderPerfiles.load();
         
-        id_perfil = new ComboBox<modPerfil>(perfiles,props.value());
+        id_perfil = new ComboBox<modPerfil>(Listperfiles,propPerfiles.value());
         id_perfil.setEmptyText("Seleccione un perfil");
         id_perfil.setAllowBlank(false);
         id_perfil.setTriggerAction(ComboBoxCell.TriggerAction.ALL);
