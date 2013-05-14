@@ -24,5 +24,5 @@ public interface servPerfiles extends RemoteService {
     
     public Integer eliminar(Integer id);
     
-     public PagingLoadResult<modPerfil> obtenerPerfiles(PagingLoadConfig config);
+    public PagingLoadResult<modPerfil> obtenerPerfiles(PagingLoadConfig config);
 }

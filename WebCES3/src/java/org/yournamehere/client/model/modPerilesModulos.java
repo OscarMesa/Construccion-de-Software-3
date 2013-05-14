@@ -67,4 +67,9 @@ public class modPerilesModulos implements Serializable{
     public void setId_modulo(Integer id_modulo) {
         this.id_modulo = id_modulo;
     }
+    
+    public static modPerilesModulos parseObject(Object object)
+    {
+        return (modPerilesModulos)object;
+    }
 }

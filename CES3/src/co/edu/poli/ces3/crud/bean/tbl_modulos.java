@@ -2,6 +2,7 @@ package co.edu.poli.ces3.crud.bean;
 
 import co.edu.poli.ces3.crud.Columna;
 import co.edu.poli.ces3.crud.Crud;
+import java.util.ArrayList;
 
 public final class tbl_modulos extends Crud {
 
@@ -63,6 +64,12 @@ public final class tbl_modulos extends Crud {
      }
 
      public tbl_modulos(){
+     }
+     
+     @Override
+     public ArrayList<tbl_modulos> select()
+     {
+         return (ArrayList<tbl_modulos>)super.select();
      }
 
      public static void main(String... args){

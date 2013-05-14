@@ -8,8 +8,10 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
+import com.sencha.gxt.cell.core.client.form.ComboBoxCell;
 import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.data.client.loader.RpcProxy;
+import com.sencha.gxt.data.shared.Converter;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.loader.LoadResultListStoreBinding;
 import com.sencha.gxt.data.shared.loader.PagingLoadConfig;
@@ -17,20 +19,29 @@ import com.sencha.gxt.data.shared.loader.PagingLoadResult;
 import com.sencha.gxt.data.shared.loader.PagingLoader;
 import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.FramedPanel;
+import com.sencha.gxt.widget.core.client.ModalPanel;
+import com.sencha.gxt.widget.core.client.Popup;
+import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.PromptMessageBox;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.BoxLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
+import com.sencha.gxt.widget.core.client.event.CellDoubleClickEvent;
+import com.sencha.gxt.widget.core.client.event.HeaderClickEvent;
 import com.sencha.gxt.widget.core.client.event.HideEvent;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
+import com.sencha.gxt.widget.core.client.form.PropertyEditor;
+import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.Grid;
+import com.sencha.gxt.widget.core.client.grid.editing.GridEditing;
+import com.sencha.gxt.widget.core.client.grid.editing.GridRowEditing;
 import com.sencha.gxt.widget.core.client.info.Info;
 import com.sencha.gxt.widget.core.client.toolbar.PagingToolBar;
-import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import org.yournamehere.client.model.modModulo;
@@ -44,10 +55,12 @@ import org.yournamehere.client.prop.propPerfilesModulos;
  *
  * @author oskar
  */
-public class uiPerfilesModulos {
+public abstract class uiPerfilesModulos {
     private ComboBox<modPerfil> id_perfil;
     private ComboBox<modModulo> id_modulo;
     private FramedPanel panel;
+    private Grid<modPerilesModulos> grid;
+    private PagingLoader<PagingLoadConfig, PagingLoadResult<modPerilesModulos>> loader;
 
 
     public uiPerfilesModulos() {
@@ -83,9 +96,9 @@ public class uiPerfilesModulos {
         
         final propPerfilesModulos props = GWT.create(propPerfilesModulos.class);
         
+        //ColumnConfig<modPerilesModulos,String> nombrePerfil = new ColumnConfig<modPerilesModulos, String>(props.nombrePerfil(),300,"Perfil");
         ColumnConfig<modPerilesModulos,String> nombrePerfil = new ColumnConfig<modPerilesModulos, String>(props.nombrePerfil(),300,"Perfil");
         ColumnConfig<modPerilesModulos,String> nombreModulo = new ColumnConfig<modPerilesModulos, String>(props.nombreModulo(),300,"Modulo");
-        
         
         List<ColumnConfig<modPerilesModulos,?>> list = new ArrayList<ColumnConfig<modPerilesModulos, ?>>();
         list.add(nombrePerfil);
@@ -96,19 +109,88 @@ public class uiPerfilesModulos {
         
         ListStore<modPerilesModulos> store = new ListStore<modPerilesModulos>(props.key());
         
-        PagingLoader<PagingLoadConfig, PagingLoadResult<modPerilesModulos>> loader = new PagingLoader<PagingLoadConfig, PagingLoadResult<modPerilesModulos>>(proxy);
+        loader = new PagingLoader<PagingLoadConfig, PagingLoadResult<modPerilesModulos>>(proxy);
         
         loader.addLoadHandler(new LoadResultListStoreBinding<PagingLoadConfig, modPerilesModulos, PagingLoadResult<modPerilesModulos>>(store));
     
-        Grid<modPerilesModulos> grid = new Grid<modPerilesModulos>(store, cm);
+        grid = new Grid<modPerilesModulos>(store, cm);
         
 //        grid.getView().setAutoExpandColumn(nombre);
         
         grid.setColumnReordering(true);
         grid.getView().setStripeRows(true);
         grid.getView().setColumnLines(true);
+
+        loader.load();
         
-        PagingToolBar toolBar = new PagingToolBar(3);
+        RpcProxy<PagingLoadConfig, PagingLoadResult<modModulo>> proxy1 = new RpcProxy<PagingLoadConfig, PagingLoadResult<modModulo>>(){
+
+            @Override
+            public void load(PagingLoadConfig loadConfig, AsyncCallback<PagingLoadResult<modModulo>> callback) {
+             SERVICES.getModulosAsync().obtenerModulos(loadConfig,callback);
+            }  
+        };
+        
+       
+        final propModulo propsed = GWT.create(propModulo.class);
+       
+        ListStore<modModulo> modulos = new ListStore<modModulo>(propsed.key());
+       
+        
+        
+        PagingLoader<PagingLoadConfig, PagingLoadResult<modModulo>>
+                loadermodulos = new PagingLoader<PagingLoadConfig, PagingLoadResult<modModulo>>(proxy1);
+        loadermodulos.addLoadHandler(
+        new LoadResultListStoreBinding<PagingLoadConfig, modModulo, PagingLoadResult<modModulo>>(modulos));
+
+        loadermodulos.load();
+//        
+//        modModulo x = new modModulo();
+//        x.setActivo(Boolean.TRUE);
+//        x.setDescripcion("afds");
+//        x.setId_modulo(Integer.MIN_VALUE);
+//        x.setNombre("oscar");
+//        modulos.add(x);
+//        
+        ComboBox<modModulo> Editid_modulo = new ComboBox<modModulo>(modulos,propsed.value());
+        
+        Editid_modulo.setPropertyEditor(new PropertyEditor<modModulo>() {
+
+            @Override
+            public String render(modModulo object) {
+                   return object == null ? object.toString():object.getNombre();
+            }
+
+            @Override
+            public modModulo parse(CharSequence text) throws ParseException {
+                modModulo x = new modModulo();
+                x.setNombre(text.toString());
+                return x;
+            }
+        });
+        // EDITING//
+        final GridEditing<modPerilesModulos> editing = createGridEditing(grid);
+        
+            editing.addEditor(nombreModulo, new Converter<String,modModulo>() {
+
+            @Override
+            public String convertFieldValue(modModulo object) {
+               return object.getNombre();
+            }
+
+            @Override
+            public modModulo convertModelValue(String object) {
+                modModulo g = new modModulo();
+                g.setNombre(object);
+                return g;
+            }
+        },Editid_modulo);
+        editing.addEditor(nombrePerfil,new TextField());
+        //editing.addEditor(nombreModulo, new TextField());        
+         
+        
+        PagingToolBar toolBar;
+        toolBar = new PagingToolBar(3);
         toolBar.bind(loader);
         loader.load();
         
@@ -141,6 +223,7 @@ public class uiPerfilesModulos {
                     @Override
                     public void onSuccess(Integer result) {
                         Info.display("Respuesta",result.toString());
+                        loader.load();
                     }
                 });
     
@@ -294,8 +377,8 @@ public class uiPerfilesModulos {
         
         id_modulo = new ComboBox<modModulo>(modulos,props.value());
         id_modulo.setEmptyText("Seleccione un perfil");
-        
-        
+        id_modulo.setAllowBlank(false);
+        id_modulo.setTriggerAction(ComboBoxCell.TriggerAction.ALL);
         
         return new FieldLabel(id_modulo, "Modulo");
     }
@@ -321,9 +404,10 @@ public class uiPerfilesModulos {
         loader.load();
         
         id_perfil = new ComboBox<modPerfil>(perfiles,props.value());
-
         id_perfil.setEmptyText("Seleccione un perfil");
-
+        id_perfil.setAllowBlank(false);
+        id_perfil.setTriggerAction(ComboBoxCell.TriggerAction.ALL);
+        
         return new FieldLabel(id_perfil, "Perfil");
     }
 
@@ -334,5 +418,18 @@ public class uiPerfilesModulos {
     public void setPanel(FramedPanel panel) {
         this.panel = panel;
     }
+    
+    protected abstract GridEditing<modPerilesModulos> createGridEditing(Grid<modPerilesModulos> grid);
 
+}
+
+
+class ImplementUIPerfilesModulos extends uiPerfilesModulos {
+ 
+  @Override
+  protected GridEditing<modPerilesModulos> createGridEditing(Grid<modPerilesModulos> editableGrid) {
+      GridRowEditing<modPerilesModulos> gre = new GridRowEditing<modPerilesModulos>(editableGrid);
+      return new GridRowEditing<modPerilesModulos>(editableGrid);
+  }
+ 
 }

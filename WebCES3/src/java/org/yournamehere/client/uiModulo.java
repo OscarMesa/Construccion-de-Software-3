@@ -58,6 +58,7 @@ public class uiModulo {
     private DateField creado;
     private ComboBox<States> activo;
     private FramedPanel panel;
+    private PagingLoader<PagingLoadConfig, PagingLoadResult<modModulo>> loader;
 
     interface StatesProperties extends PropertyAccess<States> {
         ModelKeyProvider<States> value();
@@ -123,7 +124,7 @@ public class uiModulo {
         
         ListStore<modModulo> store = new ListStore<modModulo>(props.key());
         
-        PagingLoader<PagingLoadConfig, PagingLoadResult<modModulo>> loader = new PagingLoader<PagingLoadConfig, PagingLoadResult<modModulo>>(proxy);
+        loader = new PagingLoader<PagingLoadConfig, PagingLoadResult<modModulo>>(proxy);
         
         loader.addLoadHandler(new LoadResultListStoreBinding<PagingLoadConfig, modModulo, PagingLoadResult<modModulo>>(store));
     
@@ -168,6 +169,7 @@ public class uiModulo {
                     @Override
                     public void onSuccess(Integer result) {
                         Info.display("Respuesta", result.toString());
+                        loader.load();
                     }
                 });
             }
@@ -205,6 +207,7 @@ public class uiModulo {
                                     @Override
                                     public void onSuccess(Integer result) {
                                         Info.display("Respuesta",result.toString());
+                                        loader.load();
                                     }
                                 });
                         }else{
@@ -241,6 +244,7 @@ public class uiModulo {
                                 @Override
                                 public void onSuccess(Integer result) {
                                     Info.display("Respuesta", result.toString());
+                                    loader.load();
                                 }
                             });
                         }else{

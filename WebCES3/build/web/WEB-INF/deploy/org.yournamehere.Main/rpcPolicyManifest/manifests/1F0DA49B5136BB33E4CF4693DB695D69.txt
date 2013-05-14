@@ -1,2 +1,0 @@
-serviceClass: org.yournamehere.client.rpc.servPerfiles
-path: A26575433ECCBA51533FCC3577F8D69A.gwt.rpc

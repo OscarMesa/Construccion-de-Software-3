@@ -58,19 +58,21 @@ public class servModulosImpl extends RemoteServiceServlet implements servModulos
         tbl_modulos t = new tbl_modulos();
         t.set_Cantidad(config.getLimit());
         t.set_Posicion(config.getOffset());
-        ArrayList<tbl_modulos> list = (t.select()).get("tbl_modulos");
-        list.remove(0);
         ArrayList<modModulo> modulos = new ArrayList<modModulo>();
         PagingLoadResultBean<modModulo> elements = new PagingLoadResultBean<modModulo>();
-        for (tbl_modulos x : list) {
+        
+        System.out.println("******************");
+        for (tbl_modulos x : t.select()) {
             modModulo a = new modModulo();
             a.setId_modulo(x.getId_modulo());
             a.setNombre(x.getNombre());
             a.setActivo(x.getActivo());
             a.setCreado(x.getCreado());
             a.setDescripcion(x.getDescripcion());
+            System.out.println(a.getNombre());
             modulos.add(a);
         }
+        System.out.println("******************");
         elements.setData(modulos);
         return elements; 
     }

@@ -59,9 +59,8 @@ public class servUsuariosImpl extends RemoteServiceServlet implements servUsuari
         usu.set_Posicion(config.getOffset());
         
         ArrayList<modUsuario> list = new ArrayList<modUsuario>();
-        ArrayList<tbl_usuarios> v = usu.select().get("tbl_usuarios");
-        v.remove(0);
-        for (tbl_usuarios xx : v) {
+  
+        for (tbl_usuarios xx : usu.select()) {
             modUsuario h = new modUsuario();
             h.setApellido(xx.getApellido());
             h.setClave(xx.getClave());

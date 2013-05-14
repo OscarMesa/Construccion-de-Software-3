@@ -55,10 +55,8 @@ public class servPerfilesImpl extends RemoteServiceServlet implements servPerfil
         tbl_perfiles t = new tbl_perfiles();
         t.set_Cantidad(config.getLimit());
         t.set_Posicion(config.getOffset());
-        ArrayList<tbl_perfiles> list = (t.select()).get("tbl_perfiles");
-        list.remove(0);
         ArrayList<modPerfil> elements = new ArrayList<modPerfil>();
-        for (tbl_perfiles x : list) {
+        for (tbl_perfiles x : t.select()) {
             modPerfil a = new modPerfil();
             a.setId_perfil(x.getId_perfil());
             a.setNombre(x.getNombre());

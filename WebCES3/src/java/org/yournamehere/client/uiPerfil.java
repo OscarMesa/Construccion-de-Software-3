@@ -53,6 +53,7 @@ public class uiPerfil{
     private TextArea descripcion;
     private ComboBox<States> activo;
     private FramedPanel panel;
+    private PagingLoader<PagingLoadConfig, PagingLoadResult<modPerfil>> loader;
     
     interface StatesProperties extends PropertyAccess<States> {
         ModelKeyProvider<States> value();
@@ -108,7 +109,7 @@ public class uiPerfil{
         ColumnModel<modPerfil> cm = new ColumnModel<modPerfil>(list);
         ListStore<modPerfil> store = new ListStore<modPerfil>(prop.key());
         
-        PagingLoader<PagingLoadConfig, PagingLoadResult<modPerfil>> loader = new PagingLoader<PagingLoadConfig, PagingLoadResult<modPerfil>>(proxy);
+        loader = new PagingLoader<PagingLoadConfig, PagingLoadResult<modPerfil>>(proxy);
         
         loader.addLoadHandler(new LoadResultListStoreBinding<PagingLoadConfig, modPerfil, PagingLoadResult<modPerfil>>(store));
         
@@ -154,6 +155,7 @@ public class uiPerfil{
                     @Override
                     public void onSuccess(Integer result) {
                         Info.display("Respuesta",result.toString());
+                        loader.load();
                     }
                 });
     
@@ -189,6 +191,7 @@ public class uiPerfil{
                                 @Override
                                 public void onSuccess(Integer result) {
                                     Info.display("Respuesta",result.toString());
+                                    loader.load();
                                 }
                             });
                        }else if (box.getHideButton() == box.getButtonById(Dialog.PredefinedButton.CANCEL.name())) {
@@ -224,6 +227,7 @@ public class uiPerfil{
                                 @Override
                                 public void onSuccess(Integer result) {
                                     Info.display("Respuesta", result.toString());
+                                    loader.load();
                                 }
                             });
                         }else{

@@ -13,10 +13,10 @@ public final class tbl_perfiles_modulos extends Crud {
      @Columna(ClavePrimaria=true,AutoNumerico=false, Requered = true,NameForeingKey = "tbl_modulos.id_modulo")
     private java.lang.Integer id_modulo;
      
-    @Columna(ClavePrimaria=false,AutoNumerico=false, Requered = false,NameForeingKey = "") 
+    //@Columna(ClavePrimaria=false,AutoNumerico=false, Requered = false,NameForeingKey = "") 
     private tbl_modulos tbl_modulos;
 
-    @Columna(ClavePrimaria=false,AutoNumerico=false, Requered = false,NameForeingKey = "")
+   // @Columna(ClavePrimaria=false,AutoNumerico=false, Requered = false,NameForeingKey = "")
     private tbl_perfiles tbl_perfiles;
     
     public java.lang.Integer getId_perfil(){
@@ -54,15 +54,18 @@ public final class tbl_perfiles_modulos extends Crud {
     public void setTbl_perfiles(tbl_perfiles tbl_perfiles) {
         this.tbl_perfiles = tbl_perfiles;
     }
-     
+    @Override
+    public ArrayList<tbl_perfiles_modulos> select()
+    {
+        return (ArrayList<tbl_perfiles_modulos>)super.select();
+    }
      
      
      public static void main(String... args){
          tbl_perfiles_modulos t = new tbl_perfiles_modulos();
-         ArrayList<tbl_perfiles_modulos> list = (t.select()).get("tbl_perfiles_modulos");
          //list.remove(0);
          
-         for (tbl_perfiles_modulos x : list) {
+         for (tbl_perfiles_modulos x : t.select()) {
              System.out.println(x);
          }
      }

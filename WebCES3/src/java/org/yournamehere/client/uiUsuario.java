@@ -57,6 +57,7 @@ public class uiUsuario {
     private TextField usuario;
     private TextField apellido;
     private PasswordField clave;
+    private PagingLoader<PagingLoadConfig, PagingLoadResult<modUsuario>> loader ;
     
     public uiUsuario()
     {
@@ -103,6 +104,7 @@ public class uiUsuario {
                    @Override
                    public void onSuccess(Integer result) {
                        Info.display("Respuesta", result.toString());
+                       loader.load();
                    }
                });
            }
@@ -141,6 +143,7 @@ public class uiUsuario {
                                 @Override
                                 public void onSuccess(Integer result) {
                                     Info.display("Respuesta", result.toString());
+                                    loader.load();
                                 }
                             });
                         } else if (box.getHideButton() == box.getButtonById(PredefinedButton.CANCEL.name())) {
@@ -175,7 +178,8 @@ public class uiUsuario {
 
                    @Override
                    public void onSuccess(Integer result) {
-                          Info.display("resultado", String.valueOf(result));  
+                          Info.display("resultado", String.valueOf(result));
+                          loader.load();
                    }
                });
            }
@@ -251,8 +255,7 @@ public class uiUsuario {
       ColumnModel<modUsuario> cm = new ColumnModel<modUsuario>(l);
       ListStore<modUsuario> store = new ListStore<modUsuario>(props.key());
       
-      PagingLoader<PagingLoadConfig, PagingLoadResult<modUsuario>>
-              loader = new PagingLoader<PagingLoadConfig, PagingLoadResult<modUsuario>>(proxy);
+      loader = new PagingLoader<PagingLoadConfig, PagingLoadResult<modUsuario>>(proxy);
       loader.addLoadHandler(
       new LoadResultListStoreBinding<PagingLoadConfig, modUsuario, PagingLoadResult<modUsuario>>(store));
       

@@ -66,7 +66,7 @@ public interface ICrud {
      * @see #set_Posicion(int)
      * @return
      */
-    public HashMap<String, ArrayList> select();
+    public List<? extends ICrud> select();
 
     /**
      * Ejecuta una consulta en la base de datos se puede parametrizar el
@@ -80,7 +80,7 @@ public interface ICrud {
      * @param params
      * @return
      */
-    public HashMap<String, ArrayList> select(String sql, Object... params);
+    public List<? extends ICrud> select(String sql, Object... params);
 
     /**
      * Tabla sobre la cual se realizan las operaciones en la base de datos por

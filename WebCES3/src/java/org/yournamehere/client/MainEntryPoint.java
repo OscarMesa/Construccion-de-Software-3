@@ -42,7 +42,7 @@ public class MainEntryPoint implements  EntryPoint {
         uiUsuario usuario = new uiUsuario();
         uiPerfil perfil = new uiPerfil();
         uiModulo modulo = new uiModulo();
-        uiPerfilesModulos pm = new uiPerfilesModulos();
+        uiPerfilesModulos pm = new ImplementUIPerfilesModulos();
         p.add(usuario.getPanel(),"Usuario");        
         p.add(perfil.getPanel(),"Perfil");
         p.add(modulo.getPanel(),"Modulo");

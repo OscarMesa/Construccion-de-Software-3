@@ -2,6 +2,8 @@ package co.edu.poli.ces3.crud.bean;
 
 import co.edu.poli.ces3.crud.Columna;
 import co.edu.poli.ces3.crud.Crud;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 public final class tbl_usuarios extends Crud {
 
@@ -67,14 +69,25 @@ public final class tbl_usuarios extends Crud {
      public tbl_usuarios(){
      }
      
-     public static void main(String... args){
-         tbl_usuarios e = new tbl_usuarios();
-         e.setId_usuario(40);
-         e.setApellido("kdsfsdaf");
-         e.setClave("aksdfjsadfksadf");
-         e.setNombre("jfaskdf");
-         e.setUsuario("ajajjaja");
-                  
-        // System.out.println(e.getElementAutoincrement("id_usuario"));
+     @Override
+     public ArrayList<tbl_usuarios> select()
+     {
+         return (ArrayList<tbl_usuarios>)super.select();
+     }
+     
+     public void getFields() throws IllegalArgumentException, IllegalAccessException
+     {
+         for (Field x : this.getClass().getDeclaredFields()) {
+             System.out.println(x.get(this));
+         }
+     }
+     
+     public static void main(String... args) throws IllegalArgumentException, IllegalAccessException{
+         tbl_usuarios t = new tbl_usuarios();
+         t.setApellido("mesa");
+         for (Field x : t.getClass().getDeclaredFields()) {
+             System.out.println(x.get(t));
+         }
+         // System.out.println(e.getElementAutoincrement("id_usuario"));
     }
 }

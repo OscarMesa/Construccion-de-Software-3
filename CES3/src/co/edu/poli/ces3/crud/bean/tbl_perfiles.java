@@ -56,13 +56,17 @@ public final class tbl_perfiles extends Crud {
 
      public tbl_perfiles(){
      }
+     
+     @Override
+     public ArrayList<tbl_perfiles> select()
+     {
+         return (ArrayList<tbl_perfiles>)super.select();
+     }
 
      public static void main(String... args){
          tbl_perfiles t = new tbl_perfiles();
-         ArrayList<tbl_perfiles> list = (t.select()).get("tbl_perfiles");
-         list.remove(0);
          
-         for (tbl_perfiles x : list) {
+         for (tbl_perfiles x : t.select()) {
              System.out.println(x.getNombre());
          }
      }
