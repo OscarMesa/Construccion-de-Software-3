@@ -1334,3 +1334,134 @@ Rebinding org.yournamehere.client.rpc.servModulos
       [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
    Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
       [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding org.yournamehere.client.rpc.servPerfilesModulos
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.grid.RowEditorDefaultAppearance.RowEditorResources
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.grid.RowEditorDefaultAppearance.Template
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.grid.RowEditorDefaultAppearance_Template_render_SafeHtml__RowEditorStyle_style___SafeHtmlTemplates
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.tabs.TabPanelBaseAppearance_ItemTemplate_render_SafeHtml__TabPanelStyle_style__TabItemConfig_config___SafeHtmlTemplates
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.core.client.GXTLogConfiguration.LogConfiguration
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.grid.ColumnHeaderDefaultAppearance.ColumnHeaderResources
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.grid.ColumnHeaderDefaultAppearance.ColumnHeaderTemplate
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.grid.ColumnHeaderDefaultAppearance_ColumnHeaderTemplate_render_SafeHtml__ColumnHeaderStyle_style___SafeHtmlTemplates
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.tips.TipDefaultAppearance.TipResources
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.tips.TipDefaultAppearance.TipDefaultTemplate
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.tips.TipDefaultAppearance.TipDivFrameResources
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.tips.TipDefaultAppearance_TipDefaultTemplate_render_SafeHtml__TipStyle_style___SafeHtmlTemplates
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.draggable.DraggableDefaultAppearance.DraggableResources
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.blue.client.statusproxy.BlueStatusProxyAppearance.BlueStatusProxyResources
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.statusproxy.StatusProxyBaseAppearance.StatusProxyTemplates
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.statusproxy.StatusProxyBaseAppearance_StatusProxyTemplates_template_SafeHtml__StatusProxyStyle_style___SafeHtmlTemplates
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.blue.client.tools.BlueTools.BlueToolResources
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.button.IconButtonDefaultAppearance.ToolButtonResources
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.button.IconButtonDefaultAppearance.Template
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.theme.base.client.button.IconButtonDefaultAppearance_Template_render_SafeHtml__IconButtonStyle_style___SafeHtmlTemplates
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Module org.yournamehere.Main has been loaded
+Rebinding com.google.gwt.http.client.Request.RequestImpl
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.core.client.dom.Layer.LayerAppearance
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.core.client.dom.Layer.LayerResources
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.core.client.dom.Layer.LayerTemplates
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
+Rebinding com.sencha.gxt.core.client.dom.Layer_LayerTemplates_shadow_SafeHtml__LayerStyle_style__String_ignoreClass___SafeHtmlTemplates
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.shared.RequestFactory' specified in deferred binding rule
+   Checking rule <generate-with class='com.google.web.bindery.requestfactory.gwt.rebind.RequestFactoryEditorDriverGenerator'/>
+      [WARN] Unknown type 'com.google.web.bindery.requestfactory.gwt.client.RequestFactoryEditorDriver' specified in deferred binding rule
