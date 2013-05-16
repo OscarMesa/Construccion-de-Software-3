@@ -4,69 +4,70 @@
  */
 package org.yournamehere.server.rpc;
 
-import co.edu.poli.ces3.crud.bean.tbl_perfiles_modulos;
+import co.edu.poli.ces3.crud.bean.tbl_permisos;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.sencha.gxt.data.shared.loader.PagingLoadConfig;
 import com.sencha.gxt.data.shared.loader.PagingLoadResult;
 import com.sencha.gxt.data.shared.loader.PagingLoadResultBean;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import org.yournamehere.client.model.modModulo;
 import org.yournamehere.client.model.modPerfil;
-import org.yournamehere.client.model.modPerilesModulos;
-import org.yournamehere.client.rpc.servPerfilesModulos;
+import org.yournamehere.client.model.modPermisos;
+import org.yournamehere.client.model.modUsuario;
+
+import org.yournamehere.client.rpc.servPermisos;
 
 /**
  *
- * @author oskar
+ * @author omesa
  */
-public class servPerfilesModulosImpl extends RemoteServiceServlet implements servPerfilesModulos {
+public class servPermisosImpl extends RemoteServiceServlet implements servPermisos {
 
     @Override
-    public Integer guardar(modPerilesModulos u) {
-        tbl_perfiles_modulos p = new tbl_perfiles_modulos();
-        p.setId_modulo(u.getId_modulo());
+    public Integer guardar(modPermisos u) {
+        tbl_permisos p = new tbl_permisos();
         p.setId_perfil(u.getId_perfil());
+        p.setId_usuario(u.getId_usuario());
         return p.insert();
     }
 
     @Override
-    public Integer modificar(modPerilesModulos u) {
-        tbl_perfiles_modulos p = new tbl_perfiles_modulos();
-        p.setId_modulo(u.getId_modulo());
+    public Integer modificar(modPermisos u) {
+        tbl_permisos p = new tbl_permisos();
         p.setId_perfil(u.getId_perfil());
+        p.setId_usuario(u.getId_usuario());
         return p.update();
     }
 
     @Override
-    public Integer eliminar(Integer id_modulo, Integer id_perfil) {
-        tbl_perfiles_modulos p = new tbl_perfiles_modulos();
-        p.setId_modulo(id_modulo);
+    public Integer eliminar(Integer id_perfil, Integer id_usuario) {
+        tbl_permisos p = new tbl_permisos();
         p.setId_perfil(id_perfil);
+        p.setId_usuario(id_usuario);
         return p.delete();
     }
 
     @Override
-    public PagingLoadResult<modPerilesModulos> consultar(PagingLoadConfig config) {
-        tbl_perfiles_modulos pm = new tbl_perfiles_modulos();
+    public PagingLoadResult<modPermisos> consultar(PagingLoadConfig config) {
+        tbl_permisos pm = new tbl_permisos();
         pm.set_Cantidad(config.getLimit());
         pm.set_Posicion(config.getOffset());
-        ArrayList<modPerilesModulos> listArray = new ArrayList<modPerilesModulos>();
-        PagingLoadResultBean<modPerilesModulos> elements = new PagingLoadResultBean<modPerilesModulos>();
-        for (tbl_perfiles_modulos x: pm.select()) {
-            modPerilesModulos p = new modPerilesModulos();
-            p.setId_modulo(x.getId_modulo());
+        ArrayList<modPermisos> listArray = new ArrayList<modPermisos>();
+        PagingLoadResultBean<modPermisos> elements = new PagingLoadResultBean<modPermisos>();
+        for (tbl_permisos x: pm.select()) {
+            modPermisos p = new modPermisos();
             p.setId_perfil(x.getId_perfil());
-            p.setNombreModulo(x.getTbl_modulos().getNombre());
-            p.setNombrePerfil(x.getTbl_perfiles().getNombre());
-            p.setPerfil((modPerfil)getModObject(x.getTbl_perfiles(), "org.yournamehere.client.model.modPerfil"));
-            p.setModulo((modModulo)getModObject(x.getTbl_modulos(),"org.yournamehere.client.model.modModulo"));
+            p.setId_usuario(x.getId_usuario());
+            p.setNombrePerfil(x.getPerfil().getNombre());
+            p.setNombreUsuario(x.getUsuario().getNombre());
+            p.setPerfil((modPerfil)getModObject(x.getPerfil(), "org.yournamehere.client.model.modPerfil"));
+            p.setUsuario((modUsuario)getModObject(x.getUsuario(),"org.yournamehere.client.model.modUsuario"));
             listArray.add(p);
         }
         elements.setData(listArray);
         return elements;
     }
-    
+
     public Object getModObject(Object ClassIcrud, String ClassMod)
     {
         Object ObjtM = null;
@@ -86,6 +87,5 @@ public class servPerfilesModulosImpl extends RemoteServiceServlet implements ser
         catch (SecurityException ex) {ex.printStackTrace(); }
        return ObjtM;
     }
-  
-   
+    
 }

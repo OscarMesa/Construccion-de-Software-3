@@ -8,6 +8,7 @@ import com.google.gwt.core.shared.GWT;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
+import com.sencha.gxt.cell.core.client.ButtonCell;
 import com.sencha.gxt.cell.core.client.form.ComboBoxCell;
 import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.data.client.loader.RpcProxy;
@@ -25,11 +26,14 @@ import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.PromptMessageBox;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.BoxLayoutContainer;
+import com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutPack;
 import com.sencha.gxt.widget.core.client.container.HorizontalLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.CellDoubleClickEvent;
 import com.sencha.gxt.widget.core.client.event.HeaderClickEvent;
 import com.sencha.gxt.widget.core.client.event.HideEvent;
+import com.sencha.gxt.widget.core.client.event.SelectEvent;
+import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.PropertyEditor;
@@ -50,23 +54,38 @@ import org.yournamehere.client.model.modPerilesModulos;
 import org.yournamehere.client.prop.propModulo;
 import org.yournamehere.client.prop.propPerfil;
 import org.yournamehere.client.prop.propPerfilesModulos;
-
+import com.google.gwt.cell.client.Cell.Context;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.resources.client.impl.ImageResourcePrototype;
+import com.google.gwt.uibinder.attributeparsers.SafeUriAttributeParser;
+import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
+import com.sencha.gxt.widget.core.client.grid.CellSelectionModel;
+import com.sencha.gxt.widget.core.client.grid.editing.GridInlineEditing;
 /**
  *
  * @author oskar
  */
+interface MyResources extends ClientBundle {
+            public static final MyResources INSTANCE = GWT.create(org.yournamehere.client.MyResources.class);
+
+            @ClientBundle.Source("delete.png")
+            ImageResource logo();
+}   
+
 public abstract class uiPerfilesModulos {
     private ComboBox<modPerfil> id_perfil;
     private ComboBox<modModulo> id_modulo;
     private FramedPanel panel;
-    private Grid<modPerilesModulos> grid;
     
     private PagingLoader<PagingLoadConfig, PagingLoadResult<modPerilesModulos>> loader;
+    private ListStore<modPerilesModulos> store;
     
     private final propModulo propModulo;
     private ListStore<modModulo> ListModulos;
     private PagingLoader<PagingLoadConfig, PagingLoadResult<modModulo>> loaderModulos;
   
+    protected Grid<modPerilesModulos> grid;
     private final propPerfil propPerfiles;
     private ListStore<modPerfil> Listperfiles;
     private PagingLoader<PagingLoadConfig, PagingLoadResult<modPerfil>> loaderPerfiles;
@@ -114,15 +133,44 @@ public abstract class uiPerfilesModulos {
         //ColumnConfig<modPerilesModulos,String> nombrePerfil = new ColumnConfig<modPerilesModulos, String>(props.nombrePerfil(),300,"Perfil");
         ColumnConfig<modPerilesModulos,String> nombrePerfil = new ColumnConfig<modPerilesModulos, String>(props.nombrePerfil(),300,"Perfil");
         ColumnConfig<modPerilesModulos,String> nombreModulo = new ColumnConfig<modPerilesModulos, String>(props.nombreModulo(),300,"Modulo");
+        ColumnConfig<modPerilesModulos,String> eliminar = new ColumnConfig<modPerilesModulos, String>(props.eliminar(),50,"Eliminar");
         
+       ButtonCell button = new ButtonCell();
+       button.setIcon(MyResources.INSTANCE.logo());
+       button.addSelectHandler(new SelectHandler() {
+ 
+            @Override
+            public void onSelect(SelectEvent event) {
+              Context c = event.getContext();
+              int row = c.getIndex();
+              modPerilesModulos p = store.get(row);
+              
+              SERVICES.getPerfilesModulosAsync().eliminar(p.getId_modulo(), p.getId_perfil(), new AsyncCallback<Integer>() {
+
+                  @Override
+                  public void onFailure(Throwable caught) {
+                   Info.display("Error",caught.getMessage());
+                  }
+
+                  @Override
+                  public void onSuccess(Integer result) {
+                     Info.display("Error","Eliminado " + result.toString());
+                     loader.load();
+                  }
+              });
+            }
+        });
+        eliminar.setCell(button);
         List<ColumnConfig<modPerilesModulos,?>> list = new ArrayList<ColumnConfig<modPerilesModulos, ?>>();
         list.add(nombrePerfil);
         list.add(nombreModulo);
+        list.add(eliminar);
+        
         
         
         ColumnModel<modPerilesModulos> cm = new ColumnModel<modPerilesModulos>(list);
         
-        ListStore<modPerilesModulos> store = new ListStore<modPerilesModulos>(props.key());
+        store = new ListStore<modPerilesModulos>(props.key());
         
         loader = new PagingLoader<PagingLoadConfig, PagingLoadResult<modPerilesModulos>>(proxy);
         
@@ -146,12 +194,26 @@ public abstract class uiPerfilesModulos {
             }  
         };
         
-       
-        final propModulo propsed = GWT.create(propModulo.class);
-
-        ComboBox<modModulo> Editid_modulo = new ComboBox<modModulo>(ListModulos,propsed.value());
+        ComboBox<modModulo> Editid_modulo = new ComboBox<modModulo>(ListModulos,propModulo.value());
         Editid_modulo.setTriggerAction(ComboBoxCell.TriggerAction.ALL);
         
+        ComboBox<modPerfil> Editid_perfiles = new ComboBox<modPerfil>(Listperfiles,propPerfiles.value());
+        Editid_perfiles.setTriggerAction(ComboBoxCell.TriggerAction.ALL);
+        
+        Editid_perfiles.setPropertyEditor(new PropertyEditor<modPerfil>() {
+
+            @Override
+            public String render(modPerfil object) {
+                     return object == null ? object.toString():object.getNombre();
+            }
+
+            @Override
+            public modPerfil parse(CharSequence text) throws ParseException {
+                modPerfil x = new modPerfil();
+                x.setNombre(text.toString());
+                return x;
+            }
+        });
         
         Editid_modulo.setPropertyEditor(new PropertyEditor<modModulo>() {
 
@@ -167,6 +229,7 @@ public abstract class uiPerfilesModulos {
                 return x;
             }
         });
+      //  grid.getView().setAutoExpandColumn(eliminar);
         // EDITING//
         final GridEditing<modPerilesModulos> editing = createGridEditing(grid);
         
@@ -184,7 +247,21 @@ public abstract class uiPerfilesModulos {
                 return g;
             }
         },Editid_modulo);
-        editing.addEditor(nombrePerfil,new TextField());
+        
+        editing.addEditor(nombrePerfil,new Converter<String, modPerfil>() {
+
+            @Override
+            public String convertFieldValue(modPerfil object) {
+                return object.getNombre();
+            }
+
+            @Override
+            public modPerfil convertModelValue(String object) {
+                modPerfil c = new modPerfil();
+                c.setNombre(object);
+                return c;
+            }
+        },Editid_perfiles);
         
         PagingToolBar toolBar;
         toolBar = new PagingToolBar(3);
@@ -193,10 +270,30 @@ public abstract class uiPerfilesModulos {
         
         VerticalLayoutContainer contenedor = new VerticalLayoutContainer();
         contenedor.setBorders(true);
-        contenedor.add(grid);
-        contenedor.add(toolBar);
+        contenedor.add(grid, new VerticalLayoutData(1, -1));
+        contenedor.add(toolBar,new VerticalLayoutData(1, -1));
         
-        return contenedor;
+         FramedPanel cp = new FramedPanel();
+         cp.setHeadingText("Perfiles de los modulos");
+       //  cp.setPixelSize(600,200);
+        // cp.addStyleName("margin-10");
+        
+         cp.setWidget(contenedor);
+        
+         cp.setButtonAlign(BoxLayoutPack.CENTER);
+
+         cp.addButton(new TextButton("Guardar cambios", new SelectHandler() {
+
+            @Override
+            public void onSelect(SelectEvent event) {
+                store.commitChanges();
+            }
+         }));
+         
+         
+         
+         
+         return cp;
     }
             
     
@@ -415,10 +512,24 @@ public abstract class uiPerfilesModulos {
 
 class ImplementUIPerfilesModulos extends uiPerfilesModulos {
  
+//  @Override
+//  protected GridEditing<modPerilesModulos> createGridEditing(Grid<modPerilesModulos> editableGrid) {
+//      GridRowEditing<modPerilesModulos> gre = new GridRowEditing<modPerilesModulos>(editableGrid);
+//      return new GridInlineEditing<modPerilesModulos>(editableGrid);
+//  }
   @Override
   protected GridEditing<modPerilesModulos> createGridEditing(Grid<modPerilesModulos> editableGrid) {
-      GridRowEditing<modPerilesModulos> gre = new GridRowEditing<modPerilesModulos>(editableGrid);
-      return new GridRowEditing<modPerilesModulos>(editableGrid);
+    return new GridInlineEditing<modPerilesModulos>(editableGrid);
+  }
+    
+  @Override
+  public Widget initGrid_PerfilesModulos() {
+    Widget w = super.initGrid_PerfilesModulos();
+    grid.setSelectionModel(new CellSelectionModel<modPerilesModulos>());
+     
+    grid.getColumnModel().getColumn(0).setHideable(false);
+     
+    return w;
   }
  
 }

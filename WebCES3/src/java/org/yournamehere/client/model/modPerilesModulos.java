@@ -17,7 +17,16 @@ public class modPerilesModulos implements Serializable{
     private modPerfil perfil;
     private String nombrePerfil;
     private String nombreModulo;
+    private String eliminar;
 
+    public void setEliminar(String eliminar) {
+        this.eliminar = eliminar;
+    }
+ 
+    public String getEliminar() {
+        return eliminar;
+    }
+    
     public String getNombrePerfil() {
         return nombrePerfil;
     }

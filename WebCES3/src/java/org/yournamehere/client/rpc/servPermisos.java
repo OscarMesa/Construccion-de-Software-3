@@ -9,19 +9,21 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.sencha.gxt.data.shared.loader.PagingLoadConfig;
 import com.sencha.gxt.data.shared.loader.PagingLoadResult;
 import org.yournamehere.client.model.modPerfil;
+import org.yournamehere.client.model.modPermisos;
+import org.yournamehere.client.model.modUsuario;
 
 /**
  *
- * @author oskar
+ * @author omesa
  */
-@RemoteServiceRelativePath("rpc/servperfiles")
-public interface servPerfiles extends RemoteService {
+@RemoteServiceRelativePath("rpc/servpermisos")
+public interface servPermisos extends RemoteService {
 
-    public Integer guardar(modPerfil u);
+    public Integer guardar(modPermisos u);
     
-    public Integer modificar(modPerfil u);
+    public Integer modificar(modPermisos u);
     
-    public Integer eliminar(Integer id);
+    public Integer eliminar(Integer id_perfil, Integer id_usuario);
     
-    public PagingLoadResult<modPerfil> obtenerPerfiles(PagingLoadConfig config);
+    public PagingLoadResult<modPermisos> consultar(PagingLoadConfig config);
 }

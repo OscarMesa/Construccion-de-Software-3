@@ -1,5 +1,6 @@
 package org.yournamehere.client;
 
+import org.yournamehere.client.rpc.servPermisosAsync;
 import com.google.gwt.core.client.GWT;
 import org.yournamehere.client.rpc.servModulos;
 import org.yournamehere.client.rpc.servModulosAsync;
@@ -32,6 +33,10 @@ public class SERVICES {
         
         public static servPerfilesModulosAsync getPerfilesModulosAsync(){
             return GWT.create(servPerfilesModulos.class);
+        }
+        
+        public static servPermisosAsync getPermisosAsync(){
+            return GWT.create(servPermisosAsync.class);
         }
     
 }

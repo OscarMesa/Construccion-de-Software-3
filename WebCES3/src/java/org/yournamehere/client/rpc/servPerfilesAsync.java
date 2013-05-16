@@ -7,9 +7,7 @@ package org.yournamehere.client.rpc;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.sencha.gxt.data.shared.loader.PagingLoadConfig;
 import com.sencha.gxt.data.shared.loader.PagingLoadResult;
-import java.util.ArrayList;
 import org.yournamehere.client.model.modPerfil;
-import org.yournamehere.client.model.modUsuario;
 
 /**
  *

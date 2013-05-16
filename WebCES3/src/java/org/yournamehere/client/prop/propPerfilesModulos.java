@@ -32,4 +32,6 @@ public interface propPerfilesModulos extends PropertyAccess<modPerilesModulos>{
     ValueProvider<modPerilesModulos, modModulo> modulo();
     
     ValueProvider<modPerilesModulos, modPerfil> perfil();
+    
+    ValueProvider<modPerilesModulos, String> eliminar();
 }

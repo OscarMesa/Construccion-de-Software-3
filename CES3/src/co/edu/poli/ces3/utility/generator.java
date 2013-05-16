@@ -136,7 +136,7 @@ public class generator {
     
     public static void main(String[] args){
         generator class1 = new generator();
-        class1.setNameClass("tbl_perfiles_modulos");
+        class1.setNameClass("tbl_permisos");
         class1.WhireCode();
    
     }
