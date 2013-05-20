@@ -8,9 +8,7 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.sencha.gxt.data.shared.loader.PagingLoadConfig;
 import com.sencha.gxt.data.shared.loader.PagingLoadResult;
-import org.yournamehere.client.model.modPerfil;
 import org.yournamehere.client.model.modPermisos;
-import org.yournamehere.client.model.modUsuario;
 
 /**
  *

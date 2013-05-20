@@ -9,6 +9,7 @@ import org.yournamehere.client.rpc.servPerfiles;
 import org.yournamehere.client.rpc.servPerfilesAsync;
 import org.yournamehere.client.rpc.servPerfilesModulos;
 import org.yournamehere.client.rpc.servPerfilesModulosAsync;
+import org.yournamehere.client.rpc.servPermisos;
 
 import org.yournamehere.client.rpc.servUsuarios;
 import org.yournamehere.client.rpc.servUsuariosAsync;
@@ -36,7 +37,7 @@ public class SERVICES {
         }
         
         public static servPermisosAsync getPermisosAsync(){
-            return GWT.create(servPermisosAsync.class);
+            return GWT.create(servPermisos.class);
         }
     
 }

@@ -58,10 +58,10 @@ public class servPermisosImpl extends RemoteServiceServlet implements servPermis
             modPermisos p = new modPermisos();
             p.setId_perfil(x.getId_perfil());
             p.setId_usuario(x.getId_usuario());
-            p.setNombrePerfil(x.getPerfil().getNombre());
-            p.setNombreUsuario(x.getUsuario().getNombre());
-            p.setPerfil((modPerfil)getModObject(x.getPerfil(), "org.yournamehere.client.model.modPerfil"));
-            p.setUsuario((modUsuario)getModObject(x.getUsuario(),"org.yournamehere.client.model.modUsuario"));
+            p.setNombrePerfil(x.getTbl_perfiles().getNombre());
+            p.setNombreUsuario(x.getTbl_usuarios().getNombre());
+            p.setPerfil((modPerfil)getModObject(x.getTbl_perfiles(), "org.yournamehere.client.model.modPerfil"));
+            p.setUsuario((modUsuario)getModObject(x.getTbl_usuarios(),"org.yournamehere.client.model.modUsuario"));
             listArray.add(p);
         }
         elements.setData(listArray);

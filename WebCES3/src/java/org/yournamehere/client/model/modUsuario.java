@@ -8,58 +8,58 @@ import java.io.Serializable;
  */
 public class modUsuario implements Serializable{
     
-    private Integer Id_usuario;
-    private String Nombre;
-    private String Apellido;
-    private String Clave;
-    private String Usuario;
+    private Integer id_usuario;
+    private String nombre;
+    private String apellido;
+    private String clave;
+    private String usuario;
     
     public modUsuario(){
     
     }
 
     public String getUsuario() {
-        return Usuario;
+        return usuario;
     }
 
     public void setUsuario(String Usuario) {
-        this.Usuario = Usuario;
+        this.usuario = Usuario;
     }
     
     
 
     public String getClave() {
-        return Clave;
+        return clave;
     }
 
     public void setClave(String Clave) {
-        this.Clave = Clave;
+        this.clave = Clave;
     }
     
     
 
     public Integer getId_usuario() {
-        return Id_usuario;
+        return id_usuario;
     }
 
     public void setId_usuario(Integer Id_usuario) {
-        this.Id_usuario = Id_usuario;
+        this.id_usuario = Id_usuario;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+        this.nombre = Nombre;
     }
 
     public String getApellido() {
-        return Apellido;
+        return apellido;
     }
 
     public void setApellido(String Apellido) {
-        this.Apellido = Apellido;
+        this.apellido = Apellido;
     }
     
 }

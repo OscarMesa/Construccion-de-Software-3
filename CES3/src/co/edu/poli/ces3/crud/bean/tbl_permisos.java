@@ -12,25 +12,9 @@ public final class tbl_permisos extends Crud {
      @Columna(ClavePrimaria=true,AutoNumerico=false, Requered = true,NameForeingKey = "tbl_usuarios.id_usuario")
     private java.lang.Integer id_usuario;
      
-    private tbl_perfiles perfil;
-
-    public tbl_perfiles getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(tbl_perfiles perfil) {
-        this.perfil = perfil;
-    }
-
-    public tbl_usuarios getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(tbl_usuarios usuario) {
-        this.usuario = usuario;
-    }
+    private tbl_perfiles tbl_perfiles;
     
-    private tbl_usuarios usuario;
+    private tbl_usuarios tbl_usuarios;
     
     
      public java.lang.Integer getId_perfil(){
@@ -41,8 +25,22 @@ public final class tbl_permisos extends Crud {
            return this.id_usuario;
      }
 
+    public tbl_perfiles getTbl_perfiles() {
+        return tbl_perfiles;
+    }
 
+    public void setTbl_perfiles(tbl_perfiles tbl_perfiles) {
+        this.tbl_perfiles = tbl_perfiles;
+    }
 
+    public tbl_usuarios getTbl_usuarios() {
+        return tbl_usuarios;
+    }
+
+    public void setTbl_usuarios(tbl_usuarios tbl_usuarios) {
+        this.tbl_usuarios = tbl_usuarios;
+    }
+  
      public void setId_perfil(java.lang.Integer id_perfil){
        this.id_perfil = id_perfil;
      }

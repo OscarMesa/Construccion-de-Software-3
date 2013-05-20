@@ -4,11 +4,13 @@
  */
 package org.yournamehere.client.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author omesa
  */
-public class modPermisos {
+public class modPermisos implements Serializable{
    private Integer id_perfil;
    private Integer id_usuario;
    private String nombrePerfil;

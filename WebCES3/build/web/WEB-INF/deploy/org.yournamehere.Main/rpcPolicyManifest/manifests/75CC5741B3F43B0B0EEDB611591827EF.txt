@@ -1,0 +1,2 @@
+serviceClass: org.yournamehere.client.rpc.servPermisos
+path: 7A71D25E624D36EACBB97F59BDC6B9D3.gwt.rpc

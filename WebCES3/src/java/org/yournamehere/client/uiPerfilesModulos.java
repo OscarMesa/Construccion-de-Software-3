@@ -57,8 +57,6 @@ import org.yournamehere.client.prop.propPerfilesModulos;
 import com.google.gwt.cell.client.Cell.Context;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.resources.client.impl.ImageResourcePrototype;
-import com.google.gwt.uibinder.attributeparsers.SafeUriAttributeParser;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
 import com.sencha.gxt.widget.core.client.grid.CellSelectionModel;
 import com.sencha.gxt.widget.core.client.grid.editing.GridInlineEditing;
@@ -185,14 +183,6 @@ public abstract class uiPerfilesModulos {
         grid.getView().setColumnLines(true);
 
         loader.load();
-        
-        RpcProxy<PagingLoadConfig, PagingLoadResult<modModulo>> proxy1 = new RpcProxy<PagingLoadConfig, PagingLoadResult<modModulo>>(){
-
-            @Override
-            public void load(PagingLoadConfig loadConfig, AsyncCallback<PagingLoadResult<modModulo>> callback) {
-             SERVICES.getModulosAsync().obtenerModulos(loadConfig,callback);
-            }  
-        };
         
         ComboBox<modModulo> Editid_modulo = new ComboBox<modModulo>(ListModulos,propModulo.value());
         Editid_modulo.setTriggerAction(ComboBoxCell.TriggerAction.ALL);

@@ -43,13 +43,13 @@ public class MainEntryPoint implements  EntryPoint {
         uiPerfil perfil = new uiPerfil();
         uiModulo modulo = new uiModulo();
         uiPerfilesModulos pm = new ImplementUIPerfilesModulos();
+        uiPermiso permiso = new ImplementUIPermisos();
         p.add(usuario.getPanel(),"Usuario");        
         p.add(perfil.getPanel(),"Perfil");
         p.add(modulo.getPanel(),"Modulo");
         p.add(pm.getPanel(),"Modulos de los perfiles");
+        p.add(permiso.getPanel(), "Permisos");
 
-       // RootPanel.get().add(button);
-      //  RootPanel.get().add(label);
         RootPanel.get().add(p);
     }
 

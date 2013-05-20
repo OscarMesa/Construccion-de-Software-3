@@ -239,11 +239,11 @@ public class uiUsuario {
       };
       
       final propUsuario props = GWT.create(propUsuario.class);
-      ColumnConfig<modUsuario, Integer> id_usuario = new ColumnConfig<modUsuario, Integer>(props.Id_usuario(), 50, "Identificacion");
-      ColumnConfig<modUsuario, String> nombre = new ColumnConfig<modUsuario, String>(props.Nombre(), 100, "Nombre");
-      ColumnConfig<modUsuario, String> apellido = new ColumnConfig<modUsuario, String>(props.Apellido(), 75, "Apellido");
-      ColumnConfig<modUsuario, String> usuario = new ColumnConfig<modUsuario, String>(props.Usuario(), 75, "Usuario");
-      ColumnConfig<modUsuario, String> password = new ColumnConfig<modUsuario, String>(props.Clave(), 75, "Clave");
+      ColumnConfig<modUsuario, Integer> id_usuario = new ColumnConfig<modUsuario, Integer>(props.id_usuario(), 50, "Identificacion");
+      ColumnConfig<modUsuario, String> nombre = new ColumnConfig<modUsuario, String>(props.nombre(), 100, "Nombre");
+      ColumnConfig<modUsuario, String> apellido = new ColumnConfig<modUsuario, String>(props.apellido(), 75, "Apellido");
+      ColumnConfig<modUsuario, String> usuario = new ColumnConfig<modUsuario, String>(props.usuario(), 75, "Usuario");
+      ColumnConfig<modUsuario, String> password = new ColumnConfig<modUsuario, String>(props.clave(), 75, "Clave");
        
       List<ColumnConfig<modUsuario, ?>> l = new ArrayList<ColumnConfig<modUsuario, ?>>();
       l.add(id_usuario);
